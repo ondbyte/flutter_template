@@ -1,0 +1,1 @@
+export './../screens/home/viewmodel/home_viewmodel.dart';
