@@ -1,4 +1,4 @@
-# fluuter_template
+# flutter_template
 
 A new Flutter project.
 
