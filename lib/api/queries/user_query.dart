@@ -46,7 +46,9 @@ class UserQuery {
     return """
       query {
         users {
+          id
           name  
+          email
         }
       }""";
   }
@@ -59,60 +61,14 @@ class UserQuery {
           id
           name
           email
-          avatar
-          messages {
-            id 
-            title 
-            body
-            read 
-            created_at
-          }
-          vouchers {
-            id
-            name
-            sub_title
-            code
-            qrcode
-          }
-          orders {
-            id
-          }
+          avatar         
           role {
             id
             name
           }
           profile {
             firstname
-            lastname
-            mobile_number
-            points
-            food_stamp
-            drink_stamp
-            profession {
-              id
-              title
-            }
-            nationality {
-              id
-              name
-            }
-            site {
-              id
-              name
-              branches {
-                id
-                name
-                deliveries {
-                  id
-                  delivery_time
-                }
-              }
-            }
-            alerts {
-               email
-               notification
-               text
-            }
+            lastname            
           }
         }
       }""";

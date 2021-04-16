@@ -1,15 +1,12 @@
 import 'package:meta/meta.dart';
-import './../models/model.dart';
 
 class User {
   final int id;
   final String name;
   final String email;
-  final String password;
   final String avatar;
   Role role;
   Profile profile;
-  List<Message> messages;
 
   User({
     this.id,
@@ -18,9 +15,21 @@ class User {
     this.avatar,
     this.role,
     this.profile,
-    this.password,
-    this.messages,
   });
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+    id: int.parse(json["id"]),
+    name: json["name"],
+    email: json["email"],
+    avatar: json["avatar"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+    "email": email,
+    "avatar": avatar,
+  };
 }
 
 class Role {

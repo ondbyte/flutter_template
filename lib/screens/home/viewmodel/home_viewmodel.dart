@@ -7,30 +7,30 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeViewModel extends BaseViewModel {
   UserService userService = locator<UserService>();
-//  MenuService menuService = locator<MenuService>();
-//  OfferService offerService = locator<OfferService>();
-//  MessagesService messagesService = locator<MessagesService>();
 
   User user;
-
-//  List<Items> featuredItems;
-//  List<Messages> userUnreadMessages;
-//  Offer offer;
+  List<User> users;
 
   void initialise() {
     setState(ViewStateType.Busy);
-    _updateUserInfo();
+//    _userInfo();
+    _usersInfo();
     notifyListeners();
   }
 
-  Future<void> _updateUserInfo() async {
+  Future<void> _userInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    int id = prefs.getInt('userId');
+//    int id = prefs.getInt('userId');
+    int id = 1;
 
     user = await userService.getUser(id);
-//    userUnreadMessages = await messagesService.getUnreadUserMessages(id);
-//    featuredItems = await menuService.getFeaturedItems(id);
-//    offer = await offerService.getOffer(1);
+
+    setState(ViewStateType.Completed);
+    notifyListeners();
+  }
+
+  Future<void> _usersInfo() async {
+    users = await userService.getUsers();
 
     setState(ViewStateType.Completed);
     notifyListeners();

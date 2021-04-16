@@ -79,5 +79,23 @@ Widget _appInfo(data) {
             ),
           ),
         )
-      : null;
+      : Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Palette.primaryColour),
+            ),
+            SizedBox(
+              height: 25.0,
+            ),
+            Text(
+              "Loading...",
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        );
 }
