@@ -72,7 +72,7 @@ Widget _appInfo(data) {
   return data.state == ViewStateType.Completed
       ? Center(
           child: Text(
-            "testing",
+            data.user.name,
             style: TextStyle(
               fontSize: 20.0,
               fontFamily: Font.primaryFont,

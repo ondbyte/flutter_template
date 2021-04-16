@@ -1,11 +1,12 @@
 import 'package:graphql/client.dart';
 
-GraphQLClient getGraphQLClient() {
+// GraphQL set up.
+GraphQLClient getGraphQLClient(String bearerToken) {
   final Link _link = HttpLink(
     'https://www.imarveldesign.co.uk/graphql',
     defaultHeaders: {
       // ignore: undefined_identifier
-      'Authorization': 'Bearer ',
+      'Authorization': 'Bearer $bearerToken',
     },
   );
 

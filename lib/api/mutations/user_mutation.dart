@@ -1,5 +1,6 @@
+// User mutations.
 class UserMutation {
-  // Register the user.
+  // Log the user in.
   String loginUser() {
     return """
       mutation login (\$input: LoginInput) {

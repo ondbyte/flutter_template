@@ -6,15 +6,17 @@ import './../../../viewmodels/base_viewmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeViewModel extends BaseViewModel {
-  UserService userService = locator<UserService>();
+  ApplicationApi applicationService = locator<ApplicationApi>();
+  UserApi userService = locator<UserApi>();
 
+  Application application;
   User user;
   List<User> users;
 
   void initialise() {
     setState(ViewStateType.Busy);
-//    _userInfo();
-    _usersInfo();
+    _userInfo();
+//    _usersInfo();
     notifyListeners();
   }
 
@@ -23,6 +25,7 @@ class HomeViewModel extends BaseViewModel {
 //    int id = prefs.getInt('userId');
     int id = 1;
 
+    application = await applicationService.getApplication();
     user = await userService.getUser(id);
 
     setState(ViewStateType.Completed);

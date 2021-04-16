@@ -1,16 +1,18 @@
 import 'package:graphql/client.dart';
-
-import './../models/model.dart';
-import './../config/config.dart';
-import './../api/api.dart';
+import './../../services/user/api.dart';
+import '../../models/model.dart';
+import '../../config/config.dart';
+import '../../api/api.dart';
 
 UserQuery userQuery = UserQuery();
 UserMutation userMutation = UserMutation();
 
-class UserService {
+class UserService implements UserApi {
   // Get a list of users from the site.
+  @override
   Future<List<User>> getUsers() async {
-    final GraphQLClient _user = getGraphQLClient();
+    final String bearerToken = null;
+    final GraphQLClient _user = getGraphQLClient(bearerToken);
 
     final QueryOptions options = QueryOptions(
       document: gql(
@@ -21,7 +23,7 @@ class UserService {
     final QueryResult response = await _user.query(options);
 
     if (response.hasException) {
-      throw new Exception('Could not get users data ${response.exception.toString()}.');
+      throw new Exception('USERS ERROR: ${response.exception.toString()}.');
     }
 
     final result = response.data;
@@ -32,8 +34,11 @@ class UserService {
   }
 
   // Get a specific user from ID.
+  @override
   Future<User> getUser(int id) async {
-    final GraphQLClient _user = getGraphQLClient();
+
+    final String bearerToken = null;
+    final GraphQLClient _user = getGraphQLClient(bearerToken);
 
     final QueryOptions options = QueryOptions(
       document: gql(
@@ -47,7 +52,7 @@ class UserService {
     final QueryResult response = await _user.query(options);
 
     if (response.hasException) {
-      throw new Exception('Could not get the user data. ${response.exception.toString()}');
+      throw new Exception('USER ERROR:  ${response.exception.toString()}');
     }
 
     final result = response.data;

@@ -30,6 +30,12 @@ class User {
     "email": email,
     "avatar": avatar,
   };
+
+  @override
+  String toString() {
+    return 'User: {id: $id, name: $name, email: $email, avatar: $avatar';
+  }
+
 }
 
 class Role {
