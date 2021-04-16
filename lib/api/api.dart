@@ -1,0 +1,1 @@
+export 'queries/user_query.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fluuter_template/config/config.dart';
-import './../../../models/model.dart';
+import './../../config/config.dart';
+import './../../models/model.dart';
 import './../../widgets/widgets.dart';
 import 'package:provider/provider.dart';
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'screens/screens.dart';
+import 'config/config.dart';
 
 void main() {
+  setupLocator();
   runApp(MyApp());
 }
 

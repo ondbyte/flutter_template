@@ -8,3 +8,4 @@ export 'responsive_builder.dart';
 export 'orientation_layout.dart';
 export 'screen_type_layout.dart';
 export 'locator.dart';
+export 'graphql.dart';

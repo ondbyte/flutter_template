@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './../../../config/config.dart';
+import './../config/config.dart';
 
 class FullBusyOverlay extends StatelessWidget {
   final Widget child;

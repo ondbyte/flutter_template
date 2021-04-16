@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fluuter_template/config/config.dart';
-import 'package:fluuter_template/widgets/widgets.dart';
+import './../../config/config.dart';
+import './../../widgets/widgets.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
