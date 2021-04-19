@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import './../models/model.dart';
 import './../config/config.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeApplicationHeader extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey;
@@ -77,7 +76,7 @@ class ApplicationHeader extends StatelessWidget {
                   )
                 : IconButton(
                     onPressed: () => _logUserOut(context),
-                    icon: Icon(FontAwesomeIcons.signOutAlt),
+                    icon: Icon(Icons.logout),
                   ),
 
           ],

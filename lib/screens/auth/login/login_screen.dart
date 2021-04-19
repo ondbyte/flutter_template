@@ -10,7 +10,6 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseWidget<LoginViewModel>(
       viewModel: LoginViewModel(),
-      onModelReady: (model) => model.initialise(),
       builder: (context) => ScreenTypeLayout(
         mobile: OrientationLayout(
           portrait: (context) => LoginMobilePortrait(),

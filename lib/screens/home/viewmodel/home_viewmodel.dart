@@ -22,8 +22,7 @@ class HomeViewModel extends BaseViewModel {
 
   Future<void> _userInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-//    int id = prefs.getInt('userId');
-    int id = 1;
+   int id = prefs.getInt('userId');
 
     application = await applicationService.getApplication();
     user = await userService.getUser(id);

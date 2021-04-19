@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './../../../../config/config.dart';
+import './../../../../enum/enum.dart';
 import './../../../../models/model.dart';
 import './../../../../widgets/widgets.dart';
 import './../../../../includes/include.dart';
@@ -10,7 +11,7 @@ import 'package:validators/validators.dart' as validator;
 
 class LoginMobilePortrait extends BaseModelWidget<LoginViewModel> {
   final _formKey = GlobalKey<FormState>();
-  final User user = User();
+  final User user = User(name: "", email: "");
 
   @override
   Widget build(BuildContext context, LoginViewModel data) {
@@ -53,7 +54,7 @@ class LoginMobilePortrait extends BaseModelWidget<LoginViewModel> {
 
 class LoginMobileLandscape extends BaseModelWidget<LoginViewModel> {
   final _formKey = GlobalKey<FormState>();
-  final User user = User();
+  final User user = User(name: "", email: "");
   @override
   Widget build(BuildContext context, LoginViewModel data) {
     return Scaffold(
@@ -148,20 +149,16 @@ Widget loginBtn(BuildContext context, User user, _formKey, LoginViewModel data) 
     Flushbar(
       title: message.title,
       message: message.message.replaceAll('Exception: ', ''),
-      backgroundColor: Color(message.colour),
+      backgroundColor: message.colour,
       duration: Duration(seconds: message.status != 200 ? 7 : 3),
     )..show(context).then(
-          (_) {
-        // Send the user to the Initial Application Screen on success.
-        if (message.status == 200) {
-          if (message.data.role.id == 2) {
-            Navigator.of(context).pushNamedAndRemoveUntil(InitialScreenRoute, (Route<dynamic> route) => false, arguments: message.data);
-          } else {
+        (_) {
+          // Send the user to the Initial Application Screen on success.
+          if (message.status == 200) {
             Navigator.of(context).pushNamedAndRemoveUntil(HomeScreenRoute, (Route<dynamic> route) => false, arguments: {'user': message.data, 'information': 'dashboard'});
           }
-        }
-      },
-    );
+        },
+      );
   }
 
   return Column(
@@ -169,32 +166,33 @@ Widget loginBtn(BuildContext context, User user, _formKey, LoginViewModel data) 
     children: <Widget>[
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: RaisedButton(
-          padding: EdgeInsets.all(10.0),
+        child: ElevatedButton(
           child: data.state == ViewStateType.Processing
               ? SizedBox(
-            height: 15.0,
-            width: 15.0,
-            child: CircularProgressIndicator(
-              strokeWidth: 2.0,
-              valueColor: AlwaysStoppedAnimation<Color>(
-                Palette.whiteColour,
-              ),
-            ),
-          )
+                  height: 15.0,
+                  width: 15.0,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2.0,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Palette.whiteColour,
+                    ),
+                  ),
+                )
               : Text(
-            'Login',
-            style: TextStyle(
-              color: Palette.whiteColour,
-              fontFamily: Font.secondaryFont,
-            ),
+                  'Login',
+                  style: TextStyle(
+                    color: Palette.whiteColour,
+                    fontFamily: Font.secondaryFont,
+                  ),
+                ),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Palette.primaryColour),
           ),
-          color: Palette.primaryColour,
           onPressed: () {
             // Form validation is Successful.
             if (_formKey.currentState.validate()) {
               data.logUserIn(user).then(
-                    (message) {
+                (message) {
                   // Alert message to the user.
                   _snackBar(message);
                 },
@@ -218,7 +216,7 @@ Widget registerForgottenPassword(BuildContext context, LoginViewModel data) {
     Flushbar(
       title: message.title,
       message: message.message,
-      backgroundColor: Color(message.colour),
+      backgroundColor: Palette.warningColour,
       duration: Duration(seconds: 7),
     )..show(context);
   }
@@ -270,36 +268,38 @@ Widget registerForgottenPassword(BuildContext context, LoginViewModel data) {
             ),
           ),
           actions: <Widget>[
-            FlatButton(
-              color: Palette.primaryColour,
+            TextButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Palette.primaryColour)
+              ),
               child: data.state == ViewStateType.Busy
                   ? SizedBox(
-                height: 15.0,
-                width: 15.0,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.0,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    Palette.whiteColour,
-                  ),
-                ),
-              )
+                      height: 15.0,
+                      width: 15.0,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.0,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          Palette.whiteColour,
+                        ),
+                      ),
+                    )
                   : Text(
-                'Submit',
-                style: TextStyle(
-                  color: Palette.whiteColour,
-                  fontFamily: Font.secondaryFont,
-                ),
-              ),
+                      'Submit',
+                      style: TextStyle(
+                        color: Palette.whiteColour,
+                        fontFamily: Font.secondaryFont,
+                      ),
+                    ),
               onPressed: () {
                 // Form validation is successfull.
                 if (_formAlertKey.currentState.validate()) {
                   // Close the dialog.
                   Navigator.of(context).pop();
-                  data.getForgottenPassword(email).then(
-                        (message) {
-                      _snackBar(message);
-                    },
-                  );
+                  // data.getForgottenPassword(email).then(
+                  //       (message) {
+                  //     _snackBar(message);
+                  //   },
+                  // );
                 }
               },
             ),

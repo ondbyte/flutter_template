@@ -1,10 +1,11 @@
 import './../services/services.dart';
 import './../viewmodels/viewmodels.dart';
+import './config.dart';
 import 'package:get_it/get_it.dart';
 
 GetIt locator = GetIt.instance;
 
-const bool USE_FAKE_IMPLEMENTATION = true;
+const bool USE_FAKE_IMPLEMENTATION = AppEnv.fakeData;
 
 void setupLocator() {
   // Register services

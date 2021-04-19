@@ -3,7 +3,6 @@ import './../../../../config/config.dart';
 import './../../../../models/model.dart';
 import './../../../../services/services.dart';
 import './../../../../viewmodels/base_viewmodel.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel extends BaseViewModel {
   UserApi userService = locator<UserApi>();
@@ -20,11 +19,11 @@ class LoginViewModel extends BaseViewModel {
     return response;
   }
 
-  Future<Message> getForgottenPassword(String email) async {
-    Message response = await userService.forgottenPassword(email);
-
-    notifyListeners();
-
-    return response;
-  }
+//  Future<Message> getForgottenPassword(String email) async {
+//    Message response = await userService.forgottenPassword(email);
+//
+//    notifyListeners();
+//
+//    return response;
+//  }
 }
