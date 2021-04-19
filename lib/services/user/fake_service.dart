@@ -39,4 +39,19 @@ class FakeUserServices implements UserApi {
     );
 
   }
+
+  @override
+  Future<Message> loginUser(User user) async {}
+
+  @override
+  Future<Message> registerUser(User user, Profile profile, int location, int profession, String token, bool email, bool app, bool text) async {}
+
+  @override
+  Future<Message> forgottenPassword(String email) async {}
+
+  @override
+  Future<Message> updateUserDetails(int id, User user) async {}
+
+  @override
+  Future<Message> uploadUserAvatar(int id, dynamic imageFile) async {}
 }

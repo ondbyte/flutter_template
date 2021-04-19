@@ -1,10 +1,11 @@
 import 'package:meta/meta.dart';
 
 class User {
-  final int id;
-  final String name;
-  final String email;
-  final String avatar;
+  int id;
+  String name;
+  String email;
+  String password;
+  String avatar;
   Role role;
   Profile profile;
 
@@ -12,6 +13,7 @@ class User {
     this.id,
     @required this.name,
     @required this.email,
+    this.password,
     this.avatar,
     this.role,
     this.profile,

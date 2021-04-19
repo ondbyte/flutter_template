@@ -13,9 +13,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^5.0.0
   get_it: ^6.1.1
-  shared_preferences: ^0.5.12
+  shared_preferences: ^2.0.4
   http: ^0.13.1
   graphql: ^4.0.0-beta
+  device_preview: ^0.7.1
+  validators: ^3.0.0
+  another_flushbar: ^1.10.18
 
 dev_dependencies:
   flutter_test:

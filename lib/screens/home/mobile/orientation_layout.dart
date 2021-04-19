@@ -17,7 +17,9 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
+            print("This is the floating action btn");
 //          data.updateTitle();
+            Navigator.pushNamed(context, LoginScreenRoute);
           },
         ),
         body: Column(
