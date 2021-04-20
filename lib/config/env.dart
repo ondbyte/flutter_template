@@ -1,12 +1,10 @@
 // Application environments
 class AppEnv {
-  final String appName = 'App Name';
-  final String appVersion = 'App Version';
-  final int settingsPrimary = 0xFF0080FF;
-  final int settingsAccent = 0xFF6FBEFF;
-  final int settingsBackground = 0xFFFFFFFF;
-  final int settingsSliderStatus = 0;
-  final int settingsSliderFull = 0;
+  static const bool hasLogo = true;
+  static const app = 'Only Way To Settle';
+  static const name = 'This';
+  static const description = 'The one place to resolve an argument!';
+  static const version = '1.0.0';
 
   static const bool fakeData = true;
 

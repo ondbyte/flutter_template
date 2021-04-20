@@ -16,10 +16,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => LoginScreen(),
       );
-    // case RegisterScreenRoute:
-    //   return MaterialPageRoute(
-    //     builder: (context) => RegisterScreen(),
-    //   );
+    case RegisterScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) => RegisterScreen(),
+      );
     // case InitialScreenRoute:
     //   var arguments = settings.arguments;
     //   return MaterialPageRoute(

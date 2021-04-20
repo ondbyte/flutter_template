@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_template/includes/include.dart';
 import './../config/config.dart';
 
 class BusyOverlay extends StatelessWidget {
@@ -24,15 +25,13 @@ class BusyOverlay extends StatelessWidget {
               opacity: show ? 1.0 : 0.0,
               child: Container(
                 width: screenSize.width,
-                height: screenSize.height - 100.0,
+                height: screenSize.height,
                 alignment: Alignment.center,
                 color: Color.fromARGB(100, 0, 0, 0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Center(
-                      child: Image.asset('assets/images/logo.png'),
-                    ),
+                    buildLogo(context, 150.0),
                     SizedBox(
                       height: 15.0,
                     ),

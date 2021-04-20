@@ -73,31 +73,21 @@ class HomeMobileLandscape extends BaseModelWidget<HomeViewModel> {
 Widget _appInfo(data) {
   return data.state == ViewStateType.Completed
       ? Center(
-          child: Text(
-            data.user.name,
-            style: TextStyle(
-              fontSize: 20.0,
-              fontFamily: Font.primaryFont,
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                AppEnv.description,
+                style: TextStyle(
+                  fontSize: 15.0,
+                  fontFamily: Font.primaryFont,
+                ),
+              ),
+              Text(data.application.name),
+              Text(data.application.version),
+              Text(data.application.year),
+            ],
           ),
         )
-      : Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Palette.primaryColour),
-            ),
-            SizedBox(
-              height: 25.0,
-            ),
-            Text(
-              "Loading...",
-              style: TextStyle(
-                fontSize: 16.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        );
+      : Text("");
 }

@@ -25,9 +25,7 @@ class LoginMobilePortrait extends BaseModelWidget<LoginViewModel> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Logo(
-                height: 100.0,
-              ),
+              buildLogo(context, 150.0),
               PageTitle(
                 title: 'Login',
                 height: 100.0,
@@ -65,9 +63,7 @@ class LoginMobileLandscape extends BaseModelWidget<LoginViewModel> {
           right: true,
           child: Column(
             children: <Widget>[
-              Logo(
-                height: 50.0,
-              ),
+              buildLogo(context, 150.0),
               PageTitle(
                 title: 'Login',
                 height: 50.0,
@@ -269,9 +265,7 @@ Widget registerForgottenPassword(BuildContext context, LoginViewModel data) {
           ),
           actions: <Widget>[
             TextButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Palette.primaryColour)
-              ),
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Palette.primaryColour)),
               child: data.state == ViewStateType.Busy
                   ? SizedBox(
                       height: 15.0,
