@@ -5,7 +5,6 @@ import './../../widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class DrawerOption extends StatelessWidget {
-
   final String title;
   final IconData icon;
 
@@ -14,7 +13,7 @@ class DrawerOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Provider.value(
-    value: DrawerItems(title: title, icon: icon),
+      value: DrawerItems(title: title, icon: icon),
       child: ScreenTypeLayout(
         mobile: OrientationLayout(
           portrait: (context) => DrawerOptionMobilePortrait(),

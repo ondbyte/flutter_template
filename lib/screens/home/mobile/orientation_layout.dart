@@ -13,7 +13,7 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
       show: data.state != ViewStateType.Completed,
       child: Scaffold(
         key: _scaffold,
-        drawer: AppDrawer(),
+        drawer: AppDrawer(data.application),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
@@ -33,6 +33,7 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
                   size: 25.0,
                 ),
                 onPressed: () {
+                  print("Open the drawer.");
                   _scaffold.currentState.openDrawer();
                 },
               ),
@@ -55,7 +56,7 @@ class HomeMobileLandscape extends BaseModelWidget<HomeViewModel> {
       child: Scaffold(
         body: Row(
           children: <Widget>[
-            AppDrawer(),
+            AppDrawer(data.application),
             Expanded(
               child: Center(
                 child: Center(
@@ -82,10 +83,7 @@ Widget _appInfo(data) {
                   fontSize: 15.0,
                   fontFamily: Font.primaryFont,
                 ),
-              ),
-              Text(data.application.name),
-              Text(data.application.version),
-              Text(data.application.year),
+              )
             ],
           ),
         )

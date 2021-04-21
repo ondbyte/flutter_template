@@ -9,6 +9,7 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseWidget<RegisterViewModel>(
       viewModel: RegisterViewModel(),
+      onModelReady: (model) => model.initialise(),
       builder: (context) => ScreenTypeLayout(
         mobile: OrientationLayout(
           portrait: (context) => RegisterMobilePortrait(),

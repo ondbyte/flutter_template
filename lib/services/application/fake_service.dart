@@ -7,8 +7,8 @@ class FakeApplicationServices implements ApplicationApi {
   Future<Application> getApplication() async {
     await Future.delayed(Duration(seconds: 1));
     return Application(
-      name: faker.company.name(),
-      version: faker.guid.guid(),
+      name: 'Test Flutter App',
+      version: '1.0.0',
       environment: "testing",
       year: faker.date.year(),
     );

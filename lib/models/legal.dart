@@ -13,7 +13,7 @@ class Legal {
     this.link,
   });
 
-  String id;
+  int id;
   String name;
   String description;
   String slug;

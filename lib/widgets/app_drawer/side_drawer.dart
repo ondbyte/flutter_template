@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './../../models/model.dart';
 import './drawer.dart';
 
 class SideDrawer extends StatelessWidget {
@@ -13,49 +14,62 @@ class SideDrawer extends StatelessWidget {
   final String profileTitle;
   final Color profileColour;
   final String profileSubTitle;
+  final Application application;
 
-  SideDrawer({
-    this.isRow = false,
-    this.orientation,
-    this.width,
-    this.height,
-    this.colour,
-    this.showProfile = false,
-    this.profilePosition = 'start',
-    this.profileRadius = 40.0,
-    this.profileTitle,
-    this.profileColour,
-    this.profileSubTitle,
-  });
+  SideDrawer(
+      {this.isRow = false,
+      this.orientation,
+      this.width,
+      this.height,
+      this.colour,
+      this.showProfile = false,
+      this.profilePosition = 'start',
+      this.profileRadius = 40.0,
+      this.profileTitle,
+      this.profileColour,
+      this.profileSubTitle,
+      this.application,
+      });
 
   Widget profileStart() {
     if (isRow) {
-      return Row(
-        children: <Widget>[
-          if (showProfile)
-            Container(
-              width: width,
-              height: height,
-              color: colour,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  CircleAvatar(
-                    radius: profileRadius,
-                    child: Text(profileTitle),
-                    backgroundColor: profileColour,
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  Text(profileSubTitle)
-                ],
-              ),
-            ),
+      return Column(
+        children: [
           Row(
-            children: AppDrawer.getDrawerOptions(),
+            children: <Widget>[
+              if (showProfile)
+                Container(
+                  width: width,
+                  height: height,
+                  color: colour,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircleAvatar(
+                        radius: profileRadius,
+                        child: Text(profileTitle),
+                        backgroundColor: profileColour,
+                      ),
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      Text(profileSubTitle)
+                    ],
+                  ),
+                ),
+              Row(
+                children: AppDrawer.getDrawerOptions(application),
+              ),
+              // Spacer(),
+              // Text("Test")
+            ],
           ),
-          Spacer(),
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Text('Bottom'),
+            ),
+          )
         ],
       );
     }
@@ -87,7 +101,7 @@ class SideDrawer extends StatelessWidget {
         ),
       Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: AppDrawer.getDrawerOptions(),
+        children: AppDrawer.getDrawerOptions(application),
       )
     ]);
   }
@@ -97,7 +111,7 @@ class SideDrawer extends StatelessWidget {
       return Row(
         children: <Widget>[
           Row(
-            children: AppDrawer.getDrawerOptions(),
+            children: AppDrawer.getDrawerOptions(application),
           ),
           Spacer(),
           if (showProfile)
@@ -130,7 +144,7 @@ class SideDrawer extends StatelessWidget {
             height: 15.0,
           ),
         Column(
-          children: AppDrawer.getDrawerOptions(),
+          children: AppDrawer.getDrawerOptions(application),
         ),
         Spacer(),
         if (showProfile)

@@ -7,6 +7,7 @@ import './../../../../viewmodels/base_viewmodel.dart';
 class RegisterViewModel extends BaseViewModel {
 
   UserApi userService = locator<UserApi>();
+  LegalApi legalService = locator<LegalApi>();
 
   String firstName;
   String lastName;
@@ -15,6 +16,8 @@ class RegisterViewModel extends BaseViewModel {
   String token;
   String password;
   String confirmPassword;
+
+  List<Legal> legals;
 
   dynamic checkbox = [false, false, false, false];
 
@@ -26,7 +29,7 @@ class RegisterViewModel extends BaseViewModel {
   void initialise() {
     setState(ViewStateType.Busy);
     notifyListeners();
-
+    getLegalInfo();
     notifyListeners();
   }
 
@@ -62,7 +65,7 @@ class RegisterViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<Message> registerUser(User user, Profile profile, int location, int profession, bool email, bool app, bool text) async {
+  Future<Message> registerUser(User user, Profile profile) async {
     setState(ViewStateType.Processing);
     notifyListeners();
 
@@ -77,5 +80,11 @@ class RegisterViewModel extends BaseViewModel {
     notifyListeners();
 
     return response;
+  }
+
+  Future<void> getLegalInfo() async {
+    legals = await legalService.getLegalInfo();
+    setState(ViewStateType.Completed);
+    notifyListeners();
   }
 }

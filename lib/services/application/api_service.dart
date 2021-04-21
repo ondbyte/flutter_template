@@ -1,5 +1,5 @@
 import 'package:graphql/client.dart';
-import './../../services/application/api.dart';
+import './../../services/services.dart';
 import '../../models/model.dart';
 import '../../config/config.dart';
 import '../../api/api.dart';
