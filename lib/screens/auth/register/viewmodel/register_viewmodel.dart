@@ -8,7 +8,6 @@ class RegisterViewModel extends BaseViewModel {
 
   UserApi userService = locator<UserApi>();
 
-  int title;
   String firstName;
   String lastName;
   String email;

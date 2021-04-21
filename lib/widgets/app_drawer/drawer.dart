@@ -3,6 +3,12 @@ import './../../config/config.dart';
 import './../../widgets/widgets.dart';
 
 class AppDrawer extends StatelessWidget {
+
+  final String appName;
+  final String appVersion;
+
+  AppDrawer({this.appName, this.appVersion});
+
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout(

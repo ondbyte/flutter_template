@@ -40,7 +40,8 @@ class RegisterMobilePortrait extends BaseModelWidget<RegisterViewModel> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        listWidget(context, _formKey, data, user, profile, width),
+                        listWidget(
+                            context, _formKey, data, user, profile, width),
                       ],
                     ),
                   ),
@@ -85,7 +86,8 @@ class RegisterMobileLandscape extends BaseModelWidget<RegisterViewModel> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        listWidget(context, _formKey, data, user, profile, width),
+                        listWidget(
+                            context, _formKey, data, user, profile, width),
                       ],
                     ),
                   ),
@@ -108,38 +110,20 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
       backgroundColor: message.colour,
       duration: Duration(seconds: message.status != 200 ? 7 : 3),
     )..show(context).then(
-          (_) {
-        // Send the user to the Initial Application Screen on success.
-        if (message.status == 200) {
-          Navigator.of(context).pushNamedAndRemoveUntil(LoginScreenRoute, (Route<dynamic> route) => false);
-        }
-      },
-    );
+        (_) {
+          // Send the user to the Initial Application Screen on success.
+          if (message.status == 200) {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                LoginScreenRoute, (Route<dynamic> route) => false);
+          }
+        },
+      );
   }
 
   return Column(
     children: <Widget>[
       Row(
         children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Container(
-              margin: EdgeInsets.only(left: 5.0),
-              padding: EdgeInsets.only(left: 5.0),
-              child: GestureDetector(
-                onTap: () => data.initialVariables(),
-                child: Dropdown(
-                  selectedTitle: 'Title',
-                  selected: data.titleDropdown,
-                  data: data.titles,
-                  updateSelected: (val) {
-                    profile.title = val;
-                    data.updateTitleNumber(val);
-                  },
-                ),
-              ),
-            ),
-          ),
           Expanded(
             flex: 2,
             child: Container(
@@ -227,48 +211,6 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
           )
         ],
       ),
-      Row(
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
-              padding: EdgeInsets.only(left: 5.0),
-              child: GestureDetector(
-                onTap: () => data.initialVariables(),
-                child: Dropdown(
-                  selectedTitle: 'Location',
-                  selected: data.locationDropdown,
-                  padding: true,
-                  data: data.locations,
-                  updateSelected: (val) {
-                    data.updateLocation(val);
-                    data.updateLocationNumber(val);
-                  },
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
-              padding: EdgeInsets.only(left: 5.0),
-              child: GestureDetector(
-                onTap: () => data.initialVariables(),
-                child: Dropdown(
-                  selectedTitle: 'Profession',
-                  selected: data.professionDropdown,
-                  padding: true,
-                  data: data.professions,
-                  updateSelected: (val) {
-                    data.updateProfession(val);
-                    data.updateProfessionNumber(val);
-                  },
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
       if (orientation == Orientation.portrait)
         Column(
           children: <Widget>[
@@ -311,87 +253,6 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
             SizedBox(
               height: 10.0,
             ),
-            Column(
-              children: <Widget>[
-                Container(
-                  width: width * 0.95,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 24.0,
-                        width: 24.0,
-                        child: Checkbox(
-                          value: data.emailNotification,
-                          onChanged: (bool value) => data.processBool('email', value),
-                        ),
-                      ),
-                      SizedBox(width: 10.0),
-                      Expanded(
-                        child: const Text('I would like to be notified by email.'),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                )
-              ],
-            ),
-            Column(
-              children: <Widget>[
-                Container(
-                  width: width * 0.95,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 24.0,
-                        width: 24.0,
-                        child: Checkbox(
-                          value: data.appNotification,
-                          onChanged: (bool value) => data.processBool('app', value),
-                        ),
-                      ),
-                      SizedBox(width: 10.0),
-                      Expanded(
-                        child: const Text('I would like to be notified by the app notification.'),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                )
-              ],
-            ),
-//            Column(
-//              children: <Widget>[
-//                Container(
-//                  width: width * 0.95,
-//                  child: Row(
-//                    crossAxisAlignment: CrossAxisAlignment.start,
-//                    children: <Widget>[
-//                      SizedBox(
-//                        height: 24.0,
-//                        width: 24.0,
-//                        child: Checkbox(
-//                          value: data.textNotification,
-//                          onChanged: (bool value) => data.processBool('text', value),
-//                        ),
-//                      ),
-//                      SizedBox(width: 10.0),
-//                      Expanded(
-//                        child: const Text('I would like to be notified by text.'),
-//                      ),
-//                    ],
-//                  ),
-//                ),
-//                SizedBox(
-//                  height: 10.0,
-//                )
-//              ],
-//            ),
             if (data.state != ViewStateType.Busy)
               for (var i = 0; i < data.legals.length; i++)
                 Column(
@@ -406,7 +267,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                             width: 24.0,
                             child: Checkbox(
                               value: data.checkbox[i],
-                              onChanged: (bool value) => data.updateCheckBox(i, value),
+                              onChanged: (bool value) =>
+                                  data.updateCheckBox(i, value),
                             ),
                           ),
                           SizedBox(width: 10.0),
@@ -423,7 +285,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                                 ),
                                 iconSize: 15.0,
                                 color: Palette.thirdColour,
-                                onPressed: () => _navigateToUrl(data.legals[i].link),
+                                onPressed: () =>
+                                    _navigateToUrl(data.legals[i].link),
                               ),
                             )
                         ],
@@ -469,7 +332,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                     validator: (String value) {
                       if (value.length < 6) {
                         return 'Minimum of 6 characters.';
-                      } else if (user.password != null && value != user.password) {
+                      } else if (user.password != null &&
+                          value != user.password) {
                         return 'The passwords do not match.';
                       }
                       return null;
@@ -481,87 +345,6 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
             SizedBox(
               height: 10.0,
             ),
-            Column(
-              children: <Widget>[
-                Container(
-                  width: width * 0.87,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 24.0,
-                        width: 24.0,
-                        child: Checkbox(
-                          value: data.emailNotification,
-                          onChanged: (bool value) => data.processBool('email', value),
-                        ),
-                      ),
-                      SizedBox(width: 10.0),
-                      Expanded(
-                        child: const Text('I would like to be notified by email.'),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                )
-              ],
-            ),
-            Column(
-              children: <Widget>[
-                Container(
-                  width: width * 0.87,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 24.0,
-                        width: 24.0,
-                        child: Checkbox(
-                          value: data.appNotification,
-                          onChanged: (bool value) => data.processBool('app', value),
-                        ),
-                      ),
-                      SizedBox(width: 10.0),
-                      Expanded(
-                        child: const Text('I would like to be notified by the app notification.'),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                )
-              ],
-            ),
-//            Column(
-//              children: <Widget>[
-//                Container(
-//                  width: width * 0.87,
-//                  child: Row(
-//                    crossAxisAlignment: CrossAxisAlignment.start,
-//                    children: <Widget>[
-//                      SizedBox(
-//                        height: 24.0,
-//                        width: 24.0,
-//                        child: Checkbox(
-//                          value: data.textNotification,
-//                          onChanged: (bool value) => data.processBool('text', value),
-//                        ),
-//                      ),
-//                      SizedBox(width: 10.0),
-//                      Expanded(
-//                        child: const Text('I would like to be notified by text.'),
-//                      ),
-//                    ],
-//                  ),
-//                ),
-//                SizedBox(
-//                  height: 10.0,
-//                )
-//              ],
-//            ),
             if (data.state != ViewStateType.Busy)
               for (var i = 0; i < data.legals.length; i++)
                 Column(
@@ -576,7 +359,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                             width: 24.0,
                             child: Checkbox(
                               value: data.checkbox[i],
-                              onChanged: (bool value) => data.updateCheckBox(i, value),
+                              onChanged: (bool value) =>
+                                  data.updateCheckBox(i, value),
                             ),
                           ),
                           SizedBox(width: 10.0),
@@ -593,7 +377,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                                 ),
                                 iconSize: 15.0,
                                 color: Palette.thirdColour,
-                                onPressed: () => _navigateToUrl(data.legals[i].link),
+                                onPressed: () =>
+                                    _navigateToUrl(data.legals[i].link),
                               ),
                             )
                         ],
@@ -615,47 +400,28 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
               padding: EdgeInsets.all(10.0),
               child: data.state == ViewStateType.Processing
                   ? SizedBox(
-                height: 15.0,
-                width: 15.0,
-                child: CircularProgressIndicator(
-                  backgroundColor: Palette.whiteColour,
-                  strokeWidth: 2,
-                ),
-              )
+                      height: 15.0,
+                      width: 15.0,
+                      child: CircularProgressIndicator(
+                        backgroundColor: Palette.whiteColour,
+                        strokeWidth: 2,
+                      ),
+                    )
                   : Text(
-                'Register',
-                style: TextStyle(
-                  color: Palette.whiteColour,
-                  fontFamily: Font.secondaryFont,
-                ),
-              ),
+                      'Register',
+                      style: TextStyle(
+                        color: Palette.whiteColour,
+                        fontFamily: Font.secondaryFont,
+                      ),
+                    ),
               color: Palette.primaryColour,
               onPressed: () {
-                // If missing location dropdown.
-                if (data.locationDropdown == 0) {
-                  Flushbar(
-                    title: 'Warning',
-                    message: 'You have not selected a location.',
-                    backgroundColor: Palette.warningColour,
-                    duration: Duration(seconds: 5),
-                  )..show(context);
-                  return;
-                }
-                // If missing profession dropdwon.
-                if (data.professionDropdown == 0) {
-                  Flushbar(
-                    title: 'Warning',
-                    message: 'You have not selected a profession.',
-                    backgroundColor: Palette.warningColour,
-                    duration: Duration(seconds: 5),
-                  )..show(context);
-                  return;
-                }
 
                 if (!data.checkbox[0]) {
                   Flushbar(
                     title: 'Warning',
-                    message: 'Please confirm that you are old enough to use this app.',
+                    message:
+                        'Please confirm that you are old enough to use this app.',
                     backgroundColor: Palette.warningColour,
                     duration: Duration(seconds: 5),
                   )..show(context);
@@ -665,7 +431,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                 if (!data.checkbox[1]) {
                   Flushbar(
                     title: 'Warning',
-                    message: 'Please confirm that you are happy with the GDPR policy.',
+                    message:
+                        'Please confirm that you are happy with the GDPR policy.',
                     backgroundColor: Palette.warningColour,
                     duration: Duration(seconds: 5),
                   )..show(context);
@@ -675,7 +442,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                 if (!data.checkbox[2]) {
                   Flushbar(
                     title: 'Warning',
-                    message: 'Please confirm that you have read the terms and conditions.',
+                    message:
+                        'Please confirm that you have read the terms and conditions.',
                     backgroundColor: Palette.warningColour,
                     duration: Duration(seconds: 5),
                   )..show(context);
@@ -685,7 +453,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                 if (!data.checkbox[3]) {
                   Flushbar(
                     title: 'Warning',
-                    message: 'Please confirm that you have read the privacy policy.',
+                    message:
+                        'Please confirm that you have read the privacy policy.',
                     backgroundColor: Palette.warningColour,
                     duration: Duration(seconds: 5),
                   )..show(context);
@@ -695,8 +464,13 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
 
-                  data.registerUser(user, profile, data.location, data.profession, data.emailNotification, data.appNotification, data.textNotification).then(
-                        (message) {
+                  data
+                      .registerUser(
+                          user,
+                          profile,
+                          )
+                      .then(
+                    (message) {
                       // Alert message to the user.
                       _snackBar(message);
                     },
@@ -721,7 +495,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
             ),
           ),
           onTap: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(LoginScreenRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                LoginScreenRoute, (Route<dynamic> route) => false);
           },
         ),
       ),
