@@ -1,10 +1,10 @@
 // Home screen.
 const String IntroScreenRoute = '/';
 
-const String HomeScreenRoute = '/home';
+const String HomeViewRoute = '/home';
 // Authorisation screen.
-const String LoginScreenRoute = 'login';
-const String RegisterScreenRoute = 'register';
+const String LoginViewRoute = 'login';
+const String RegisterViewRoute = 'register';
 // Application screen.
 const String InitialScreenRoute = '/application';
 const String AboutScreenRoute = '/application/about';

@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       ),
       onGenerateRoute: router.generateRoute,
       initialRoute: IntroScreenRoute,
-      home: HomeScreen(),
+      home: HomeView(),
     );
   }
 }

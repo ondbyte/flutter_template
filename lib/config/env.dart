@@ -3,7 +3,7 @@ class AppEnv {
   static const bool hasLogo = true;
   static const app = 'Only Way To Settle';
   static const name = 'This';
-  static const description = 'The one place to resolve an argument!';
+  static const description = 'The only place to resolve an argument!';
   static const version = '1.0.0';
 
   static const bool fakeData = true;

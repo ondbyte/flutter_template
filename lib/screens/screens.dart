@@ -1,4 +1,4 @@
-export 'home/home_screen.dart';
-export 'auth/login/login_screen.dart';
-export 'auth/register/register_screen.dart';
+export 'home/view.dart';
+export 'auth/login/view.dart';
+export 'auth/register/view.dart';
 export 'undefinded_screen.dart';

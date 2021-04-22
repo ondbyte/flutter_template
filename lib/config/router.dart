@@ -8,17 +8,17 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //   return MaterialPageRoute(
     //     builder: (context) => IntroScreen(),
     //   );
-    case HomeScreenRoute:
+    case HomeViewRoute:
       return MaterialPageRoute(
-        builder: (context) => HomeScreen(),
+        builder: (context) => HomeView(),
       );
-    case LoginScreenRoute:
+    case LoginViewRoute:
       return MaterialPageRoute(
-        builder: (context) => LoginScreen(),
+        builder: (context) => LoginView(),
       );
-    case RegisterScreenRoute:
+    case RegisterViewRoute:
       return MaterialPageRoute(
-        builder: (context) => RegisterScreen(),
+        builder: (context) => RegisterView(),
       );
     // case InitialScreenRoute:
     //   var arguments = settings.arguments;

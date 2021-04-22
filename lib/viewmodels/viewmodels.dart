@@ -1,2 +1,3 @@
-export './../screens/home/viewmodel/home_viewmodel.dart';
-export './../screens/auth/login/viewmodel/login_viewmodel.dart';
+export '../screens/home/viewmodel.dart';
+export '../screens/auth/login/viewmodel.dart';
+export '../screens/auth/register/viewmodel.dart';

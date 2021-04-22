@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import './../../config/config.dart';
 import './../../widgets/widgets.dart';
-import 'viewmodel/home_viewmodel.dart';
+import 'viewmodel.dart';
 import 'mobile/orientation_layout.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<HomeViewModel>(

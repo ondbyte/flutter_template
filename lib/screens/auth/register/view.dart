@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import './../../../config/config.dart';
 import './../../../widgets/widgets.dart';
-import 'viewmodel/register_viewmodel.dart';
+import 'viewmodel.dart';
 import 'mobile/orientation_layout.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<RegisterViewModel>(

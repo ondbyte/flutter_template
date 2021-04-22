@@ -88,5 +88,5 @@ class ApplicationHeader extends StatelessWidget {
 
 
 void _logUserOut(BuildContext context) {
-  Navigator.pushNamed(context, LoginScreenRoute);
+  Navigator.pushNamed(context, LoginViewRoute);
 }

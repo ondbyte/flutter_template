@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './../includes/include.dart';
 import './../config/config.dart';
 
 class FullBusyOverlay extends StatelessWidget {
@@ -30,6 +31,7 @@ class FullBusyOverlay extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    buildLogo(context, 150.0),
                     CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(Palette.primaryColour),
                     ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import './../../../config/config.dart';
 import './../../../widgets/widgets.dart';
-import 'viewmodel/login_viewmodel.dart';
+import 'viewmodel.dart';
 import 'mobile/orientation_layout.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {

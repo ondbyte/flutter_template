@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import './../../../config/config.dart';
 import './../../../enum/enum.dart';
-import './../viewmodel/home_viewmodel.dart';
+import '../viewmodel.dart';
 import './../../../widgets/widgets.dart';
 
 class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
@@ -9,7 +9,7 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
 
   @override
   Widget build(BuildContext context, HomeViewModel data) {
-    return BusyOverlay(
+    return FullBusyOverlay(
       show: data.state != ViewStateType.Completed,
       child: Scaffold(
         key: _scaffold,
@@ -19,7 +19,7 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
           onPressed: () {
             print("This is the floating action btn");
 //          data.updateTitle();
-            Navigator.pushNamed(context, LoginScreenRoute);
+            Navigator.pushNamed(context, LoginViewRoute);
           },
         ),
         body: Column(

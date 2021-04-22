@@ -1,8 +1,8 @@
-import './../../../../enum/enum.dart';
-import './../../../../config/config.dart';
-import './../../../../models/model.dart';
-import './../../../../services/services.dart';
-import './../../../../viewmodels/base_viewmodel.dart';
+import '../../../enum/enum.dart';
+import '../../../config/config.dart';
+import '../../../models/model.dart';
+import '../../../services/services.dart';
+import '../../../viewmodels/base_viewmodel.dart';
 
 class RegisterViewModel extends BaseViewModel {
 

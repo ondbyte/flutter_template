@@ -5,7 +5,7 @@ import './../../../../models/model.dart';
 import './../../../../widgets/widgets.dart';
 import './../../../../includes/include.dart';
 import './../../../../partials/partial.dart';
-import './../viewmodel/register_viewmodel.dart';
+import './../../../../viewmodels/viewmodels.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:validators/validators.dart' as validator;
 import 'package:url_launcher/url_launcher.dart';
@@ -13,7 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 class RegisterMobilePortrait extends BaseModelWidget<RegisterViewModel> {
   static final _formKey = GlobalKey<FormState>();
   final int titleID = 0;
-  final User user = User();
+  final User user = User(name: "", email: "");
   final Profile profile = Profile();
 
   @override
@@ -40,8 +40,7 @@ class RegisterMobilePortrait extends BaseModelWidget<RegisterViewModel> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        listWidget(
-                            context, _formKey, data, user, profile, width),
+                        listWidget(context, _formKey, data, user, profile, width),
                       ],
                     ),
                   ),
@@ -57,7 +56,7 @@ class RegisterMobilePortrait extends BaseModelWidget<RegisterViewModel> {
 class RegisterMobileLandscape extends BaseModelWidget<RegisterViewModel> {
   final _formKey = GlobalKey<FormState>();
   final int titleID = 0;
-  final User user = User();
+  final User user = User(name: "", email: "");
   final Profile profile = Profile();
   @override
   Widget build(BuildContext context, RegisterViewModel data) {
@@ -86,8 +85,7 @@ class RegisterMobileLandscape extends BaseModelWidget<RegisterViewModel> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        listWidget(
-                            context, _formKey, data, user, profile, width),
+                        listWidget(context, _formKey, data, user, profile, width),
                       ],
                     ),
                   ),
@@ -113,8 +111,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
         (_) {
           // Send the user to the Initial Application Screen on success.
           if (message.status == 200) {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                LoginScreenRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(LoginViewRoute, (Route<dynamic> route) => false);
           }
         },
       );
@@ -267,8 +264,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                             width: 24.0,
                             child: Checkbox(
                               value: data.checkbox[i],
-                              onChanged: (bool value) =>
-                                  data.updateCheckBox(i, value),
+                              onChanged: (bool value) => data.updateCheckBox(i, value),
                             ),
                           ),
                           SizedBox(width: 10.0),
@@ -285,8 +281,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                                 ),
                                 iconSize: 15.0,
                                 color: Palette.thirdColour,
-                                onPressed: () =>
-                                    _navigateToUrl(data.legals[i].link),
+                                onPressed: () => _navigateToUrl(data.legals[i].link),
                               ),
                             )
                         ],
@@ -332,8 +327,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                     validator: (String value) {
                       if (value.length < 6) {
                         return 'Minimum of 6 characters.';
-                      } else if (user.password != null &&
-                          value != user.password) {
+                      } else if (user.password != null && value != user.password) {
                         return 'The passwords do not match.';
                       }
                       return null;
@@ -359,8 +353,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                             width: 24.0,
                             child: Checkbox(
                               value: data.checkbox[i],
-                              onChanged: (bool value) =>
-                                  data.updateCheckBox(i, value),
+                              onChanged: (bool value) => data.updateCheckBox(i, value),
                             ),
                           ),
                           SizedBox(width: 10.0),
@@ -377,8 +370,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                                 ),
                                 iconSize: 15.0,
                                 color: Palette.thirdColour,
-                                onPressed: () =>
-                                    _navigateToUrl(data.legals[i].link),
+                                onPressed: () => _navigateToUrl(data.legals[i].link),
                               ),
                             )
                         ],
@@ -396,8 +388,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: RaisedButton(
-              padding: EdgeInsets.all(10.0),
+            child: ElevatedButton(
               child: data.state == ViewStateType.Processing
                   ? SizedBox(
                       height: 15.0,
@@ -407,21 +398,19 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                         strokeWidth: 2,
                       ),
                     )
-                  : Text(
-                      'Register',
-                      style: TextStyle(
-                        color: Palette.whiteColour,
-                        fontFamily: Font.secondaryFont,
-                      ),
+                  : Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text('Register'),
                     ),
-              color: Palette.primaryColour,
+              // color: Palette.primaryColour,
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Palette.primaryColour),
+              ),
               onPressed: () {
-
                 if (!data.checkbox[0]) {
                   Flushbar(
                     title: 'Warning',
-                    message:
-                        'Please confirm that you are old enough to use this app.',
+                    message: 'Please confirm that you are old enough to use this app.',
                     backgroundColor: Palette.warningColour,
                     duration: Duration(seconds: 5),
                   )..show(context);
@@ -431,8 +420,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                 if (!data.checkbox[1]) {
                   Flushbar(
                     title: 'Warning',
-                    message:
-                        'Please confirm that you are happy with the GDPR policy.',
+                    message: 'Please confirm that you are happy with the GDPR policy.',
                     backgroundColor: Palette.warningColour,
                     duration: Duration(seconds: 5),
                   )..show(context);
@@ -442,8 +430,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                 if (!data.checkbox[2]) {
                   Flushbar(
                     title: 'Warning',
-                    message:
-                        'Please confirm that you have read the terms and conditions.',
+                    message: 'Please confirm that you have read the terms and conditions.',
                     backgroundColor: Palette.warningColour,
                     duration: Duration(seconds: 5),
                   )..show(context);
@@ -453,8 +440,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                 if (!data.checkbox[3]) {
                   Flushbar(
                     title: 'Warning',
-                    message:
-                        'Please confirm that you have read the privacy policy.',
+                    message: 'Please confirm that you have read the privacy policy.',
                     backgroundColor: Palette.warningColour,
                     duration: Duration(seconds: 5),
                   )..show(context);
@@ -466,9 +452,9 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
 
                   data
                       .registerUser(
-                          user,
-                          profile,
-                          )
+                    user,
+                    profile,
+                  )
                       .then(
                     (message) {
                       // Alert message to the user.
@@ -495,8 +481,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
             ),
           ),
           onTap: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                LoginScreenRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(LoginViewRoute, (Route<dynamic> route) => false);
           },
         ),
       ),

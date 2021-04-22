@@ -5,7 +5,7 @@ import './../../../../models/model.dart';
 import './../../../../widgets/widgets.dart';
 import './../../../../includes/include.dart';
 import './../../../../partials/partial.dart';
-import './../viewmodel/login_viewmodel.dart';
+import './../../../../viewmodels/viewmodels.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:validators/validators.dart' as validator;
 
@@ -151,7 +151,7 @@ Widget loginBtn(BuildContext context, User user, _formKey, LoginViewModel data) 
         (_) {
           // Send the user to the Initial Application Screen on success.
           if (message.status == 200) {
-            Navigator.of(context).pushNamedAndRemoveUntil(HomeScreenRoute, (Route<dynamic> route) => false, arguments: {'user': message.data, 'information': 'dashboard'});
+            Navigator.of(context).pushNamedAndRemoveUntil(HomeViewRoute, (Route<dynamic> route) => false, arguments: {'user': message.data, 'information': 'dashboard'});
           }
         },
       );
@@ -318,7 +318,7 @@ Widget registerForgottenPassword(BuildContext context, LoginViewModel data) {
             ),
           ),
           onTap: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(RegisterScreenRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(RegisterViewRoute, (Route<dynamic> route) => false);
           },
         ),
       ),
