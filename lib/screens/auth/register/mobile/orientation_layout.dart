@@ -7,7 +7,6 @@ import './../../../../includes/include.dart';
 import './../../../../partials/partial.dart';
 import './../../../../viewmodels/viewmodels.dart';
 import 'package:another_flushbar/flushbar.dart';
-import 'package:validators/validators.dart' as validator;
 import 'package:url_launcher/url_launcher.dart';
 
 class RegisterMobilePortrait extends BaseModelWidget<RegisterViewModel> {
@@ -128,12 +127,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                 initialValue: data.firstName,
                 icon: Icons.person,
                 hintText: 'First Name',
-                validator: (String value) {
-                  if (value.isEmpty) {
-                    return 'Enter firstname.';
-                  }
-                  return null;
-                },
+                validator: (String value) => FormValidator.validateInputField(value, 'firstname'),
                 onChanged: (String value) {
                   data.updateFirstName(value);
                 },
@@ -149,12 +143,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
               initialValue: data.lastName,
               icon: Icons.person,
               hintText: 'Surname',
-              validator: (String value) {
-                if (value.isEmpty) {
-                  return 'Enter lastname.';
-                }
-                return null;
-              },
+              validator: (String value) => FormValidator.validateInputField(value, 'lastname'),
               onChanged: (String value) {
                 data.updateLastName(value);
               },
@@ -173,12 +162,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
               icon: Icons.email,
               hintText: 'Email Address',
               isEmail: true,
-              validator: (String value) {
-                if (!validator.isEmail(value)) {
-                  return 'Invalid email.';
-                }
-                return null;
-              },
+              validator: FormValidator.validateEmail,
               onChanged: (String value) {
                 data.updateEmail(value);
               },
@@ -192,12 +176,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
               initialValue: data.mobile,
               icon: Icons.mobile_screen_share,
               hintText: 'Mobile',
-              validator: (String value) {
-                if (value.isEmpty) {
-                  return 'Enter Mobile.';
-                }
-                return null;
-              },
+              validator: (String value) => FormValidator.validateNumberField(value, 'mobile'),
               onChanged: (String value) {
                 data.updateMobile(value);
               },
@@ -216,13 +195,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
               initialValue: data.password,
               hintText: 'Password',
               isPassword: true,
-              validator: (String value) {
-                if (value.length < 6) {
-                  return 'Minimum of 6 characters.';
-                }
-                _formKey.currentState.save();
-                return null;
-              },
+              validator: (String value) => FormValidator.validatePassword(value: value, passNumber: 8),
               onChanged: (String value) {
                 data.updatePassword(value);
               },
@@ -235,14 +208,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
               initialValue: data.confirmPassword,
               hintText: 'Confirm Password',
               isPassword: true,
-              validator: (String value) {
-                if (value.length < 6) {
-                  return 'Minimum of 6 characters.';
-                } else if (user.password != null && value != user.password) {
-                  return 'The passwords do not match.';
-                }
-                return null;
-              },
+              validator: (String value) => FormValidator.validatePasswordConfirmation(value, user.password),
               onChanged: (String value) {
                 data.updateConfirmPassword(value);
               },
@@ -306,13 +272,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                     initialValue: data.password,
                     hintText: 'Password',
                     isPassword: true,
-                    validator: (String value) {
-                      if (value.length < 6) {
-                        return 'Minimum of 6 characters.';
-                      }
-                      _formKey.currentState.save();
-                      return null;
-                    },
+                    validator: (String value) => FormValidator.validatePassword(value: value, passNumber: 8),
                     onSaved: (String value) {
                       user.password = value;
                     },
@@ -324,14 +284,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                     initialValue: data.confirmPassword,
                     hintText: 'Confirm Password',
                     isPassword: true,
-                    validator: (String value) {
-                      if (value.length < 6) {
-                        return 'Minimum of 6 characters.';
-                      } else if (user.password != null && value != user.password) {
-                        return 'The passwords do not match.';
-                      }
-                      return null;
-                    },
+                    validator: (String value) => FormValidator.validatePasswordConfirmation(value, user.password),
                   ),
                 ),
               ],

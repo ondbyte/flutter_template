@@ -7,7 +7,6 @@ import './../../../../includes/include.dart';
 import './../../../../partials/partial.dart';
 import './../../../../viewmodels/viewmodels.dart';
 import 'package:another_flushbar/flushbar.dart';
-import 'package:validators/validators.dart' as validator;
 
 class LoginMobilePortrait extends BaseModelWidget<LoginViewModel> {
   final _formKey = GlobalKey<FormState>();
@@ -106,13 +105,7 @@ Widget userEmailTextInput(User user, _formKey) {
     icon: Icons.email,
     hintText: 'Email Address',
     isEmail: true,
-    validator: (String value) {
-      if (!validator.isEmail(value)) {
-        return 'Invalid email.';
-      }
-      _formKey.currentState.save();
-      return null;
-    },
+    validator: FormValidator.validateEmail,
     onSaved: (String value) {
       user.email = value;
     },
@@ -125,13 +118,7 @@ Widget userPasswordTextInput(User user, _formKey) {
     icon: Icons.lock,
     hintText: 'Password',
     isPassword: true,
-    validator: (String value) {
-      if (value.length < 6) {
-        return 'Minimum of 6 characters.';
-      }
-      _formKey.currentState.save();
-      return null;
-    },
+    validator: (String value) => FormValidator.validatePassword(value: value, passNumber: 8),
     onSaved: (String value) {
       user.password = value;
     },
@@ -241,13 +228,7 @@ Widget registerForgottenPassword(BuildContext context, LoginViewModel data) {
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: TextFormField(
-                      validator: (String value) {
-                        if (!validator.isEmail(value)) {
-                          return 'Invalid email.';
-                        }
-                        _formAlertKey.currentState.save();
-                        return null;
-                      },
+                      validator: FormValidator.validateEmail,
                       onSaved: (String value) {
                         email = value;
                       },
