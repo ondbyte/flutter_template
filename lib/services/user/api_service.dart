@@ -11,7 +11,7 @@ UserMutation userMutation = UserMutation();
 class UserService implements UserApi {
   // Get a list of users from the site.
   @override
-  Future<dynamic> getUsers() async {
+  Future getUsers() async {
     try {
       final String bearerToken = null;
       final GraphQLClient _user = getGraphQLClient(bearerToken);
@@ -33,8 +33,8 @@ class UserService implements UserApi {
       Iterable list = result['users'];
 
       return list.map((users) => User.fromJson(users)).toList();
-    } catch(e) {
-     return Message(
+    } catch (e) {
+      return Message(
         status: 401,
         title: 'Error',
         message: e.toString(),
@@ -46,7 +46,7 @@ class UserService implements UserApi {
 
   // Get a specific user from ID.
   @override
-  Future<dynamic> getUser(int id) async {
+  Future getUser(int id) async {
     try {
       final String bearerToken = null;
       final GraphQLClient _user = getGraphQLClient(bearerToken);
@@ -76,20 +76,21 @@ class UserService implements UserApi {
       );
 
       return user;
-    } catch(e) {
-       return Message(
-          status: 401,
-          title: 'Error',
-          message: e.toString(),
-          colour: Palette.errorColour,
-          data: null,
-        );
+    } catch (e) {
+      return Message(
+        status: 401,
+        title: 'Error',
+        message: e.toString(),
+        colour: Palette.errorColour,
+        data: null,
+      );
     }
   }
 
   // Log user into application.
   @override
-  Future<Message> loginUser(User user) async {
+  Future loginUser(User user) async {
+    // print(user);
     try {
       final String bearerToken = null;
       final GraphQLClient _user = getGraphQLClient(bearerToken);
@@ -153,221 +154,194 @@ class UserService implements UserApi {
         ),
       );
     } catch (e) {
-      return Message(
-        status: 401,
-        title: 'Error',
-        message: e.toString(),
-        colour: Palette.errorColour,
-        data: null,
-      );
+      throw Exception(e.toString());
     }
   }
 
- // Register the user.
- @override
- Future<Message> registerUser(User user, Profile profile) async {
-   try {
+  // Register the user.
+  @override
+  Future registerUser(User user, Profile profile) async {
+    try {
+      final String bearerToken = null;
+      final GraphQLClient _user = getGraphQLClient(bearerToken);
 
-     final String bearerToken = null;
-     final GraphQLClient _user = getGraphQLClient(bearerToken);
+      final MutationOptions options = MutationOptions(
+        document: gql(
+          userMutation.createUser(),
+        ),
+        variables: {
+          "input": {
+            "firstname": profile.firstname,
+            "lastname": profile.lastname,
+            "email": user.email,
+            "password": user.password,
+            "mobile_number": profile.mobileNumber,
+          }
+        },
+      );
 
-     final MutationOptions options = MutationOptions(
-       document: gql(
-         userMutation.createUser(),
-       ),
-       variables: {
-         "input": {
-           "firstname": profile.firstname,
-           "lastname": profile.lastname,
-           "email": user.email,
-           "password": user.password,
-           "mobile_number": profile.mobileNumber,
-         }
-       },
-     );
+      final QueryResult response = await _user.mutate(options);
 
-     final QueryResult response = await _user.mutate(options);
+      if (response.hasException && response.exception.graphqlErrors.first.extensions['validation'] != null) {
+        var message = response.exception.graphqlErrors.first.extensions['validation'].toString();
+        return Message(
+          status: 301,
+          title: 'Warning',
+          message: message,
+          colour: Palette.warningColour,
+        );
+      }
 
-     if (response.hasException &&
-         response.exception.graphqlErrors.first.extensions['validation'] !=
-             null) {
-       var message = response
-           .exception.graphqlErrors.first.extensions['validation']
-           .toString();
-       return Message(
-         status: 301,
-         title: 'Warning',
-         message: message,
-         colour: Palette.warningColour,
-       );
-     }
+      if (response.hasException) {
+        throw new Exception(response);
+      }
 
-     if (response.hasException) {
-       throw new Exception(response);
-     }
+      return Message(
+        status: 200,
+        title: 'Success',
+        message: 'You have been registered successfully. Please check your email.',
+        colour: Palette.successColour,
+      );
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 
-     return Message(
-       status: 200,
-       title: 'Success',
-       message:
-           'You have been registered successfully. Please check your email.',
-       colour: Palette.successColour,
-     );
-   } catch (e) {
-     return Message(
-       status: 401,
-       title: 'Error',
-       message: e.toString(),
-       colour: Palette.errorColour,
-     );
-   }
- }
+  // Forgotten user password.
+  @override
+  Future forgottenPassword(String email) async {
+    try {
+      final String bearerToken = null;
+      final GraphQLClient _user = getGraphQLClient(bearerToken);
 
- // Forgotten user password.
- @override
- Future<Message> forgottenPassword(String email) async {
-   try {
+      final MutationOptions options = MutationOptions(
+        document: gql(
+          userMutation.forgottenPassword(),
+        ),
+        variables: {
+          "input": {
+            "email": email,
+          }
+        },
+      );
 
-     final String bearerToken = null;
-     final GraphQLClient _user = getGraphQLClient(bearerToken);
+      final QueryResult response = await _user.mutate(options);
 
-     final MutationOptions options = MutationOptions(
-       document: gql(
-         userMutation.forgottenPassword(),
-       ),
-       variables: {
-         "input": {
-           "email": email,
-         }
-       },
-     );
+      if (response.hasException) {
+        throw new Exception('There seems to be a problem. Please contact the system admin.');
+      }
 
-     final QueryResult response = await _user.mutate(options);
+      final result = response.data;
 
-     if (response.hasException) {
-       throw new Exception(
-           'There seems to be a problem. Please contact the system admin.');
-     }
+      if (result['forgotPassword']['status'] == 'EMAIL_NOT_SENT') {
+        return Message(
+          status: 301,
+          title: 'Warning',
+          message: result['forgotPassword']['message'],
+          colour: Palette.warningColour,
+        );
+      } else {
+        return Message(
+          status: 200,
+          title: 'Success',
+          message: result['forgotPassword']['message'],
+          colour: Palette.successColour,
+        );
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 
-     final result = response.data;
+  // Update the user information.
+  @override
+  Future updateUserDetails(int id, User user) async {
+    try {
+      final String bearerToken = null;
+      final GraphQLClient _user = getGraphQLClient(bearerToken);
 
-     if (result['forgotPassword']['status'] == 'EMAIL_NOT_SENT') {
-       return Message(
-         status: 301,
-         title: 'Warning',
-         message: result['forgotPassword']['message'],
-         colour: Palette.warningColour,
-       );
-     } else {
-       return Message(
-         status: 200,
-         title: 'Success',
-         message: result['forgotPassword']['message'],
-         colour: Palette.successColour,
-       );
-     }
-   } catch (e) {
-     return Message(
-       status: 401,
-       title: 'Error',
-       message: e.toString(),
-       colour: Palette.errorColour,
-     );
-   }
- }
+      final MutationOptions options = MutationOptions(
+        document: gql(
+          userMutation.updateUserDetails(),
+        ),
+        variables: {
+          "input": {
+            "id": id,
+            "firstname": user.profile.firstname,
+            "lastname": user.profile.lastname,
+            "email": user.email,
+          }
+        },
+      );
 
- // Update the user information.
- @override
- Future<Message> updateUserDetails(int id, User user) async {
-   try {
+      final QueryResult response = await _user.mutate(options);
 
-     final String bearerToken = null;
-     final GraphQLClient _user = getGraphQLClient(bearerToken);
+      if (response.hasException) {
+        String message = response.exception.graphqlErrors.first.message;
+        throw new Exception(message);
+      }
 
-     final MutationOptions options = MutationOptions(
-       document: gql(
-         userMutation.updateUserDetails(),
-       ),
-       variables: {
-         "input": {
-           "id": id,
-           "firstname": user.profile.firstname,
-           "lastname": user.profile.lastname,
-           "email": user.email,
-         }
-       },
-     );
+      final result = response.data;
 
-     final QueryResult response = await _user.mutate(options);
+      return Message(
+        status: 200,
+        title: 'Success',
+        message: result['updateUserDetails']['message'],
+        colour: Palette.successColour,
+      );
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 
-     if (response.hasException) {
-       String message = response.exception.graphqlErrors.first.message;
-       throw new Exception(message);
-     }
+  // Upload the user avatar.
+  @override
+  Future uploadUserAvatar(int id, dynamic imageFile) async {
+    String fileName = imageFile.path.split("/").last;
+    var byteData = imageFile.readAsBytesSync();
 
-     final result = response.data;
+    var multipartFile = http.MultipartFile.fromBytes(
+      'file',
+      byteData,
+      filename: fileName,
+    );
 
-     return Message(
-       status: 200,
-       title: 'Success',
-       message: result['updateUserDetails']['message'],
-       colour: Palette.successColour,
-     );
-   } catch (e) {
-     return Message(
-       status: 400,
-       title: 'Error',
-       message: e.toString(),
-       colour: Palette.errorColour,
-     );
-   }
- }
+    try {
+      final String bearerToken = null;
+      final GraphQLClient _user = getGraphQLClient(bearerToken);
 
- // Upload the user avatar.
- @override
- Future<Message> uploadUserAvatar(int id, dynamic imageFile) async {
-   String fileName = imageFile.path.split("/").last;
-   var byteData = imageFile.readAsBytesSync();
+      final MutationOptions options = MutationOptions(
+        document: gql(
+          userMutation.uploadUserAvatar(),
+        ),
+        variables: {
+          "id": id,
+          "file": multipartFile,
+        },
+      );
 
-   var multipartFile = http.MultipartFile.fromBytes(
-     'file',
-     byteData,
-     filename: fileName,
-   );
+      final QueryResult response = await _user.mutate(options);
 
-   try {
-     final String bearerToken = null;
-     final GraphQLClient _user = getGraphQLClient(bearerToken);
+      if (response.hasException) {
+        String message = response.exception.toString();
+        throw new Exception(message);
+      }
 
-     final MutationOptions options = MutationOptions(
-       document: gql(
-         userMutation.uploadUserAvatar(),
-       ),
-       variables: {"id": id, "file": multipartFile,},
-     );
+      final result = response.data;
 
-     final QueryResult response = await _user.mutate(options);
-
-     if (response.hasException) {
-       String message = response.exception.toString();
-       throw new Exception(message);
-     }
-
-     final result = response.data;
-
-     return Message(
-       status: 200,
-       title: 'Success',
-       message: result['uploadUserAvatar']['message'],
-       colour: Palette.successColour,
-     );
-   } catch (e) {
-     return Message(
-       status: 400,
-       title: 'Error',
-       message: e.toString(),
-       colour: Palette.errorColour,
-     );
-   }
- }
+      return Message(
+        status: 200,
+        title: 'Success',
+        message: result['uploadUserAvatar']['message'],
+        colour: Palette.successColour,
+      );
+    } catch (e) {
+      return Message(
+        status: 400,
+        title: 'Error',
+        message: e.toString(),
+        colour: Palette.errorColour,
+      );
+    }
+  }
 }

@@ -7,11 +7,11 @@ import '../../../viewmodels/base_viewmodel.dart';
 class LoginViewModel extends BaseViewModel {
   UserApi userService = locator<UserApi>();
 
-  Future<Message> logUserIn(User user) async {
+  Future logUserIn(User user) async {
     setState(ViewStateType.Processing);
     notifyListeners();
 
-    Message response = await userService.loginUser(user);
+    dynamic response = await userService.loginUser(user);
 
     setState(ViewStateType.Completed);
     notifyListeners();

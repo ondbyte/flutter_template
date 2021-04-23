@@ -10,7 +10,7 @@ import 'package:another_flushbar/flushbar.dart';
 
 class LoginMobilePortrait extends BaseModelWidget<LoginViewModel> {
   final _formKey = GlobalKey<FormState>();
-  final User user = User(name: "", email: "");
+  final User user = User();
 
   @override
   Widget build(BuildContext context, LoginViewModel data) {
@@ -51,7 +51,7 @@ class LoginMobilePortrait extends BaseModelWidget<LoginViewModel> {
 
 class LoginMobileLandscape extends BaseModelWidget<LoginViewModel> {
   final _formKey = GlobalKey<FormState>();
-  final User user = User(name: "", email: "");
+  final User user = User();
   @override
   Widget build(BuildContext context, LoginViewModel data) {
     return Scaffold(
@@ -136,6 +136,7 @@ Widget loginBtn(BuildContext context, User user, _formKey, LoginViewModel data) 
       duration: Duration(seconds: message.status != 200 ? 7 : 3),
     )..show(context).then(
         (_) {
+          data.setState(ViewStateType.Completed);
           // Send the user to the Initial Application Screen on success.
           if (message.status == 200) {
             Navigator.of(context).pushNamedAndRemoveUntil(HomeViewRoute, (Route<dynamic> route) => false, arguments: {'user': message.data, 'information': 'dashboard'});
@@ -174,12 +175,24 @@ Widget loginBtn(BuildContext context, User user, _formKey, LoginViewModel data) 
           onPressed: () {
             // Form validation is Successful.
             if (_formKey.currentState.validate()) {
+              _formKey.currentState.save();
               data.logUserIn(user).then(
                 (message) {
                   // Alert message to the user.
                   _snackBar(message);
                 },
-              );
+              ).catchError((error) {
+                // print(error);
+                var errorMessage = Message(
+                  status: 400,
+                  title: 'Error',
+                  message: error.toString(),
+                  colour: Palette.errorColour,
+                );
+
+                // Alert message to the user.
+                _snackBar(errorMessage);
+              });
             }
           },
         ),

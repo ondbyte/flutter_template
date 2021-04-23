@@ -26,17 +26,27 @@ class Message {
   });
 
   factory Message.fromJson(Map<String, dynamic> json) => Message(
+        id: int.parse(json["id"]),
         status: json["status"],
         title: json["title"],
+        body: json["body"],
         message: json["message"],
+        data: json["data"],
         colour: json["colour"],
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "status": status,
         "title": title,
+        "body": body,
         "message": message,
         "colour": colour,
         "data": data,
       };
+
+  @override
+  String toString() {
+    return 'Message: {id: $id, status: $status, title: $title, body: $body, message: $message, colour: $colour, data: $data}';
+  }
 }

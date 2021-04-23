@@ -31,4 +31,9 @@ class Application {
     "environment": environment,
     "year": year,
   };
+
+  @override
+  String toString() {
+    return 'Application: {name: $name, version: $version, environment: $environment, year: $year}';
+  }
 }

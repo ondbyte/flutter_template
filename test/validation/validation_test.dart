@@ -1,18 +1,18 @@
 import 'package:flutter_test/flutter_test.dart';
-import './../../../../lib/config/config.dart';
+import '../../lib/config/config.dart';
 
 void main() {
   group('InputField validation', () {
     test('Input field is empty', () {
       var inputField = FormValidator.validateInputField('', 'firstname');
 
-      expect(inputField, 'Please complete the firstname field!');
+      expect(inputField, 'Missing firstname field!');
     });
 
     test('Input field is not valid because there is not enough characters.', () {
       var inputField = FormValidator.validateInputField('j', 'firstname');
 
-      expect(inputField, 'firstname field must contain at least 2 characters!');
+      expect(inputField, 'At least 2 characters!');
     });
 
     test('Input field is valid', () {
@@ -26,13 +26,13 @@ void main() {
     test('Input field is empty', () {
       var inputField = FormValidator.validateNumberField('', 'mobile');
 
-      expect(inputField, 'Please complete the mobile field!');
+      expect(inputField, 'Missing mobile field!');
     });
 
     test('Input field is not valid', () {
       var inputField = FormValidator.validateNumberField('rwerfsdfs', 'mobile');
 
-      expect(inputField, 'Please enter a valid mobile number!');
+      expect(inputField, 'Mobile not valid number!');
     });
 
     test('Input field is valid', () {
@@ -46,13 +46,13 @@ void main() {
     test('the email field is empty', () {
       var inputField = FormValidator.validateEmail('');
 
-      expect(inputField, 'Please enter an email address!');
+      expect(inputField, 'Missing email address!');
     });
 
     test('the email field is not valid', () {
       var inputField = FormValidator.validateEmail('test');
 
-      expect(inputField, 'Please enter a valid email address.');
+      expect(inputField, 'Email address not valid.');
     });
 
     test('the email field is valid', () {

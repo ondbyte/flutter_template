@@ -20,7 +20,7 @@ class Legal {
   String link;
 
   factory Legal.fromJson(Map<String, dynamic> json) => Legal(
-        id: json["id"],
+        id: int.parse(json["id"]),
         name: json["name"],
         description: json["description"],
         slug: json["slug"],
@@ -34,4 +34,9 @@ class Legal {
         "slug": slug,
         "link": link,
       };
+
+  @override
+  String toString() {
+    return 'Legal: {id: $id, name: $name, description: $description, slug: $slug, link: $link}';
+  }
 }

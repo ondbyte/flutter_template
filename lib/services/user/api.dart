@@ -2,19 +2,19 @@ import './../../models/model.dart';
 
 abstract class UserApi {
 
-  Future<dynamic> getUser(int userId);
+  Future getUser(int userId);
 
-  Future<dynamic> getUsers();
+  Future getUsers();
 
-  Future<Message> loginUser(User user);
+  Future loginUser(User user);
 
- Future<Message> registerUser(User user, Profile profile,);
+ Future registerUser(User user, Profile profile,);
 
- Future<Message> forgottenPassword(String email);
+ Future forgottenPassword(String email);
 
- Future<Message> updateUserDetails(int id, User user);
+ Future updateUserDetails(int id, User user);
 
- Future<Message> uploadUserAvatar(int id, dynamic imageFile);
+ Future uploadUserAvatar(int id, dynamic imageFile);
 
 
 

@@ -35,7 +35,7 @@ class User {
 
   @override
   String toString() {
-    return 'User: {id: $id, name: $name, email: $email, avatar: $avatar';
+    return 'User: {id: $id, name: $name, email: $email, avatar: $avatar}';
   }
 
 }
