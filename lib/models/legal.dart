@@ -11,6 +11,7 @@ class Legal {
     this.description,
     this.slug,
     this.link,
+    this.value = false,
   });
 
   int id;
@@ -18,6 +19,7 @@ class Legal {
   String description;
   String slug;
   String link;
+  bool value;
 
   factory Legal.fromJson(Map<String, dynamic> json) => Legal(
         id: int.parse(json["id"]),

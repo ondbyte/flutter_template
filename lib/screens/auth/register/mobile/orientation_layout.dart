@@ -39,7 +39,8 @@ class RegisterMobilePortrait extends BaseModelWidget<RegisterViewModel> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        listWidget(context, _formKey, data, user, profile, width),
+                        listWidget(
+                            context, _formKey, data, user, profile, width),
                       ],
                     ),
                   ),
@@ -84,7 +85,8 @@ class RegisterMobileLandscape extends BaseModelWidget<RegisterViewModel> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        listWidget(context, _formKey, data, user, profile, width),
+                        listWidget(
+                            context, _formKey, data, user, profile, width),
                       ],
                     ),
                   ),
@@ -110,7 +112,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
         (_) {
           // Send the user to the Initial Application Screen on success.
           if (message.status == 200) {
-            Navigator.of(context).pushNamedAndRemoveUntil(LoginViewRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                LoginViewRoute, (Route<dynamic> route) => false);
           }
         },
       );
@@ -127,7 +130,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                 initialValue: data.firstName,
                 icon: Icons.person,
                 hintText: 'First Name',
-                validator: (String value) => FormValidator.validateInputField(value, 'firstname'),
+                validator: (String value) =>
+                    FormValidator.validateInputField(value, 'firstname'),
                 onChanged: (String value) {
                   data.updateFirstName(value);
                 },
@@ -143,7 +147,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
               initialValue: data.lastName,
               icon: Icons.person,
               hintText: 'Surname',
-              validator: (String value) => FormValidator.validateInputField(value, 'lastname'),
+              validator: (String value) =>
+                  FormValidator.validateInputField(value, 'lastname'),
               onChanged: (String value) {
                 data.updateLastName(value);
               },
@@ -176,7 +181,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
               initialValue: data.mobile,
               icon: Icons.mobile_screen_share,
               hintText: 'Mobile',
-              validator: (String value) => FormValidator.validateNumberField(value, 'mobile'),
+              validator: (String value) =>
+                  FormValidator.validateNumberField(value, 'mobile'),
               onChanged: (String value) {
                 data.updateMobile(value);
               },
@@ -195,7 +201,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
               initialValue: data.password,
               hintText: 'Password',
               isPassword: true,
-              validator: (String value) => FormValidator.validatePassword(value: value, passNumber: 8),
+              validator: (String value) =>
+                  FormValidator.validatePassword(value: value, passNumber: 8),
               onChanged: (String value) {
                 data.updatePassword(value);
               },
@@ -208,7 +215,9 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
               initialValue: data.confirmPassword,
               hintText: 'Confirm Password',
               isPassword: true,
-              validator: (String value) => FormValidator.validatePasswordConfirmation(value, user.password),
+              validator: (String value) =>
+                  FormValidator.validatePasswordConfirmation(
+                      value, user.password),
               onChanged: (String value) {
                 data.updateConfirmPassword(value);
               },
@@ -229,8 +238,9 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                             height: 24.0,
                             width: 24.0,
                             child: Checkbox(
-                              value: data.checkbox[i],
-                              onChanged: (bool value) => data.updateCheckBox(i, value),
+                              value: data.checkbox[i].value,
+                              onChanged: (bool value) =>
+                                  data.updateCheckBox(i, value),
                             ),
                           ),
                           SizedBox(width: 10.0),
@@ -247,7 +257,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                                 ),
                                 iconSize: 15.0,
                                 color: Palette.thirdColour,
-                                onPressed: () => _navigateToUrl(data.legals[i].link),
+                                onPressed: () =>
+                                    _navigateToUrl(data.legals[i].link),
                               ),
                             )
                         ],
@@ -272,7 +283,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                     initialValue: data.password,
                     hintText: 'Password',
                     isPassword: true,
-                    validator: (String value) => FormValidator.validatePassword(value: value, passNumber: 8),
+                    validator: (String value) => FormValidator.validatePassword(
+                        value: value, passNumber: 8),
                     onSaved: (String value) {
                       user.password = value;
                     },
@@ -284,7 +296,9 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                     initialValue: data.confirmPassword,
                     hintText: 'Confirm Password',
                     isPassword: true,
-                    validator: (String value) => FormValidator.validatePasswordConfirmation(value, user.password),
+                    validator: (String value) =>
+                        FormValidator.validatePasswordConfirmation(
+                            value, user.password),
                   ),
                 ),
               ],
@@ -306,7 +320,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                             width: 24.0,
                             child: Checkbox(
                               value: data.checkbox[i],
-                              onChanged: (bool value) => data.updateCheckBox(i, value),
+                              onChanged: (bool value) =>
+                                  data.updateCheckBox(i, value),
                             ),
                           ),
                           SizedBox(width: 10.0),
@@ -323,7 +338,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                                 ),
                                 iconSize: 15.0,
                                 color: Palette.thirdColour,
-                                onPressed: () => _navigateToUrl(data.legals[i].link),
+                                onPressed: () =>
+                                    _navigateToUrl(data.legals[i].link),
                               ),
                             )
                         ],
@@ -355,49 +371,22 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                       padding: EdgeInsets.all(10.0),
                       child: Text('Register'),
                     ),
-              // color: Palette.primaryColour,
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Palette.primaryColour),
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(Palette.primaryColour),
               ),
               onPressed: () {
-                if (!data.checkbox[0]) {
-                  Flushbar(
-                    title: 'Warning',
-                    message: 'Please confirm that you are old enough to use this app.',
-                    backgroundColor: Palette.warningColour,
-                    duration: Duration(seconds: 5),
-                  )..show(context);
-                  return;
-                }
-
-                if (!data.checkbox[1]) {
-                  Flushbar(
-                    title: 'Warning',
-                    message: 'Please confirm that you are happy with the GDPR policy.',
-                    backgroundColor: Palette.warningColour,
-                    duration: Duration(seconds: 5),
-                  )..show(context);
-                  return;
-                }
-
-                if (!data.checkbox[2]) {
-                  Flushbar(
-                    title: 'Warning',
-                    message: 'Please confirm that you have read the terms and conditions.',
-                    backgroundColor: Palette.warningColour,
-                    duration: Duration(seconds: 5),
-                  )..show(context);
-                  return;
-                }
-
-                if (!data.checkbox[3]) {
-                  Flushbar(
-                    title: 'Warning',
-                    message: 'Please confirm that you have read the privacy policy.',
-                    backgroundColor: Palette.warningColour,
-                    duration: Duration(seconds: 5),
-                  )..show(context);
-                  return;
+                for (var i = 0; i < data.checkbox.length; i++) {
+                  if (!data.checkbox[i].value) {
+                    Flushbar(
+                      title: 'Warning',
+                      message:
+                          'Please confirm the ${data.checkbox[i].name} checkbox.',
+                      backgroundColor: Palette.warningColour,
+                      duration: Duration(seconds: 5),
+                    )..show(context);
+                    return;
+                  }
                 }
 
                 if (_formKey.currentState.validate()) {
@@ -413,7 +402,18 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                       // Alert message to the user.
                       _snackBar(message);
                     },
-                  );
+                  ).catchError((error) {
+                    // print(error);
+                    var errorMessage = Message(
+                      status: 400,
+                      title: 'Error',
+                      message: error.toString(),
+                      colour: Palette.errorColour,
+                    );
+
+                    // Alert message to the user.
+                    _snackBar(errorMessage);
+                  });
                 }
               },
             ),
@@ -434,7 +434,8 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
             ),
           ),
           onTap: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(LoginViewRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                LoginViewRoute, (Route<dynamic> route) => false);
           },
         ),
       ),

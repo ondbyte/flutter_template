@@ -5,7 +5,6 @@ import '../../../services/services.dart';
 import '../../../viewmodels/base_viewmodel.dart';
 
 class RegisterViewModel extends BaseViewModel {
-
   UserApi userService = locator<UserApi>();
   LegalApi legalService = locator<LegalApi>();
 
@@ -19,10 +18,10 @@ class RegisterViewModel extends BaseViewModel {
 
   List<Legal> legals;
 
-  dynamic checkbox = [false, false, false, false];
+  List<Legal> checkbox = [];
 
   void updateCheckBox(int index, bool value) {
-    checkbox[index] = value;
+    checkbox[index].value = value;
     notifyListeners();
   }
 
@@ -84,6 +83,7 @@ class RegisterViewModel extends BaseViewModel {
 
   Future<void> getLegalInfo() async {
     legals = await legalService.getLegalInfo();
+    checkbox = legals.map((legal) => Legal(id: legal.id, name: legal.name)).toList();
     setState(ViewStateType.Completed);
     notifyListeners();
   }
