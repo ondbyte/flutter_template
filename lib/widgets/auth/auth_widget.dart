@@ -17,14 +17,14 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
       backgroundColor: message.colour,
       duration: Duration(seconds: message.status != 200 ? 7 : 3),
     )..show(context).then(
-          (_) {
-        // Send the user to the Initial Application Screen on success.
-        if (message.status == 200) {
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              LoginViewRoute, (Route<dynamic> route) => false);
-        }
-      },
-    );
+        (_) {
+          // Send the user to the Initial Application Screen on success.
+          if (message.status == 200) {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                LoginViewRoute, (Route<dynamic> route) => false);
+          }
+        },
+      );
   }
 
   return Column(
@@ -268,20 +268,20 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
             child: ElevatedButton(
               child: data.state == ViewStateType.Processing
                   ? SizedBox(
-                height: 15.0,
-                width: 15.0,
-                child: CircularProgressIndicator(
-                  backgroundColor: Palette.whiteColour,
-                  strokeWidth: 2,
-                ),
-              )
+                      height: 15.0,
+                      width: 15.0,
+                      child: CircularProgressIndicator(
+                        backgroundColor: Palette.whiteColour,
+                        strokeWidth: 2,
+                      ),
+                    )
                   : Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Text('Register'),
-              ),
+                      padding: EdgeInsets.all(10.0),
+                      child: Text('Register'),
+                    ),
               style: ButtonStyle(
                 backgroundColor:
-                MaterialStateProperty.all<Color>(Palette.primaryColour),
+                    MaterialStateProperty.all<Color>(Palette.primaryColour),
               ),
               onPressed: () {
                 for (var i = 0; i < data.checkbox.length; i++) {
@@ -289,7 +289,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                     Flushbar(
                       title: 'Warning',
                       message:
-                      'Please confirm the ${data.checkbox[i].name} checkbox.',
+                          'Please confirm the ${data.checkbox[i].name} checkbox.',
                       backgroundColor: Palette.warningColour,
                       duration: Duration(seconds: 5),
                     )..show(context);
@@ -306,7 +306,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                     profile,
                   )
                       .then(
-                        (message) {
+                    (message) {
                       // Alert message to the user.
                       _snackBar(message);
                     },
@@ -372,7 +372,8 @@ Widget userPasswordTextInput(User user, _formKey) {
     icon: Icons.lock,
     hintText: 'Password',
     isPassword: true,
-    validator: (String value) => FormValidator.validatePassword(value: value, passNumber: 8),
+    validator: (String value) =>
+        FormValidator.validatePassword(value: value, passNumber: 8),
     onSaved: (String value) {
       user.password = value;
     },
@@ -380,7 +381,8 @@ Widget userPasswordTextInput(User user, _formKey) {
 }
 
 // Login button.
-Widget loginBtn(BuildContext context, User user, _formKey, LoginViewModel data) {
+Widget loginBtn(
+    BuildContext context, User user, _formKey, LoginViewModel data) {
   // Alert the user of the progress..
   void _snackBar(Message message) {
     Flushbar(
@@ -389,14 +391,16 @@ Widget loginBtn(BuildContext context, User user, _formKey, LoginViewModel data) 
       backgroundColor: message.colour,
       duration: Duration(seconds: message.status != 200 ? 7 : 3),
     )..show(context).then(
-          (_) {
-        data.setState(ViewStateType.Completed);
-        // Send the user to the Initial Application Screen on success.
-        if (message.status == 200) {
-          Navigator.of(context).pushNamedAndRemoveUntil(HomeViewRoute, (Route<dynamic> route) => false, arguments: {'user': message.data, 'information': 'dashboard'});
-        }
-      },
-    );
+        (_) {
+          data.setState(ViewStateType.Completed);
+          // Send the user to the Initial Application Screen on success.
+          if (message.status == 200) {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                HomeViewRoute, (Route<dynamic> route) => false,
+                arguments: {'user': message.data, 'information': 'dashboard'});
+          }
+        },
+      );
   }
 
   return Column(
@@ -407,33 +411,34 @@ Widget loginBtn(BuildContext context, User user, _formKey, LoginViewModel data) 
         child: ElevatedButton(
           child: data.state == ViewStateType.Processing
               ? SizedBox(
-            height: 15.0,
-            width: 15.0,
-            child: CircularProgressIndicator(
-              key: const ValueKey("siteProgressIndicator"),
-              strokeWidth: 2.0,
-              valueColor: AlwaysStoppedAnimation<Color>(
-                Palette.whiteColour,
-              ),
-            ),
-          )
+                  height: 15.0,
+                  width: 15.0,
+                  child: CircularProgressIndicator(
+                    key: const ValueKey("siteProgressIndicator"),
+                    strokeWidth: 2.0,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Palette.whiteColour,
+                    ),
+                  ),
+                )
               : Text(
-            'Login',
-            key: const ValueKey("siteLoginBtn"),
-            style: TextStyle(
-              color: Palette.whiteColour,
-              fontFamily: Font.secondaryFont,
-            ),
-          ),
+                  'Login',
+                  key: const ValueKey("siteLoginBtn"),
+                  style: TextStyle(
+                    color: Palette.whiteColour,
+                    fontFamily: Font.secondaryFont,
+                  ),
+                ),
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Palette.primaryColour),
+            backgroundColor:
+                MaterialStateProperty.all<Color>(Palette.primaryColour),
           ),
           onPressed: () {
             // Form validation is Successful.
             if (_formKey.currentState.validate()) {
               _formKey.currentState.save();
               data.logUserIn(user).then(
-                    (message) {
+                (message) {
                   // Alert message to the user.
                   _snackBar(message);
                 },
@@ -468,7 +473,7 @@ Widget registerForgottenPassword(BuildContext context, LoginViewModel data) {
     Flushbar(
       title: message.title,
       message: message.message,
-      backgroundColor: Palette.warningColour,
+      backgroundColor: message.colour,
       duration: Duration(seconds: 7),
     )..show(context);
   }
@@ -477,77 +482,99 @@ Widget registerForgottenPassword(BuildContext context, LoginViewModel data) {
   void _showDialog() {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            'Forgotten Password',
-            style: TextStyle(
-              color: Palette.primaryColour,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold,
-              fontFamily: Font.primaryFont,
-            ),
-          ),
-          content: Container(
-            child: Form(
-              key: _formAlertKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      validator: FormValidator.validateEmail,
-                      onSaved: (String value) {
-                        email = value;
-                      },
-                      controller: forgottenEmailTxt,
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.email),
-                        hintText: 'Request password via email',
-                        labelText: 'Email Address',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Palette.primaryColour)),
-              child: data.state == ViewStateType.Busy
-                  ? SizedBox(
-                height: 15.0,
-                width: 15.0,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.0,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    Palette.whiteColour,
-                  ),
-                ),
-              )
-                  : Text(
-                'Submit',
+      builder: (context) {
+        bool processing = false;
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: Text(
+                'Forgotten Password',
                 style: TextStyle(
-                  color: Palette.whiteColour,
-                  fontFamily: Font.secondaryFont,
+                  color: Palette.primaryColour,
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: Font.primaryFont,
                 ),
               ),
-              onPressed: () {
-                // Form validation is successfull.
-                if (_formAlertKey.currentState.validate()) {
-                  // Close the dialog.
-                  // Navigator.of(context).pop();
-                  data.getForgottenPassword(email).then(
+              content: Container(
+                child: Form(
+                  key: _formAlertKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          validator: FormValidator.validateEmail,
+                          onSaved: (String value) {
+                            email = value;
+                          },
+                          controller: forgottenEmailTxt,
+                          decoration: InputDecoration(
+                            icon: Icon(Icons.email),
+                            hintText: 'Request password via email',
+                            labelText: 'Email Address',
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Palette.primaryColour)),
+                  child: processing == true
+                      ? SizedBox(
+                          height: 15.0,
+                          width: 15.0,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2.0,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Palette.whiteColour,
+                            ),
+                          ),
+                        )
+                      : Text(
+                          'Submit',
+                          style: TextStyle(
+                            color: Palette.whiteColour,
+                            fontFamily: Font.secondaryFont,
+                          ),
+                        ),
+                  onPressed: () {
+                    // Form validation is successfull.
+                    if (_formAlertKey.currentState.validate()) {
+                      // Show circular processing on button.
+                      setState(() {
+                        processing = true;
+                      });
+
+                      // Close the dialog.
+                      data.getForgottenPassword(email).then(
                         (message) {
-                      _snackBar(message);
-                    },
-                  );
-                }
-              },
-            ),
-          ],
+                          // Stop circular processing on button.
+                          setState(() {
+                            processing = false;
+                          });
+
+                          // Close dialog if the forgotten password has been a success.
+                          if (message.status == 200) {
+                            Navigator.of(context).pop();
+                          }
+                          // Return the alert for the user.
+                          _snackBar(message);
+                        },
+                      );
+                    }
+                  },
+                ),
+                if (data.state == ViewStateType.Processing) Text("Processing")
+              ],
+            );
+          },
         );
       },
     );
@@ -568,7 +595,8 @@ Widget registerForgottenPassword(BuildContext context, LoginViewModel data) {
             ),
           ),
           onTap: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(RegisterViewRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                RegisterViewRoute, (Route<dynamic> route) => false);
           },
         ),
       ),

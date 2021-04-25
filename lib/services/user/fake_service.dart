@@ -14,7 +14,8 @@ class FakeUserServices implements UserApi {
         id: index + 1,
         name: faker.person.name(),
         email: faker.internet.email(),
-        avatar: index % 2 == 0 ? "images/user/user.png" : "images/user/no-user.png",
+        avatar:
+            index % 2 == 0 ? "images/user/user.png" : "images/user/no-user.png",
       ),
     );
   }
@@ -38,7 +39,6 @@ class FakeUserServices implements UserApi {
       email: faker.internet.email(),
       avatar: "images/user/user.png",
     );
-
   }
 
   @override
@@ -75,14 +75,14 @@ class FakeUserServices implements UserApi {
       status: 200,
       title: 'Success',
       message:
-      'Test - You have been registered successfully. Please check your email.',
+          'Test - You have been registered successfully. Please check your email.',
       colour: Palette.successColour,
     );
   }
 
   @override
   Future<Message> forgottenPassword(String email) async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(seconds: 5));
 
     return Message(
       status: 200,
