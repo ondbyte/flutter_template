@@ -13,6 +13,7 @@ class InputText extends StatelessWidget {
   final Function onChanged;
   final bool isPassword;
   final bool isEmail;
+  final String keyWord;
 
   InputText({
     this.initialValue,
@@ -26,6 +27,7 @@ class InputText extends StatelessWidget {
     this.onChanged,
     this.isPassword = false,
     this.isEmail = false,
+    this.keyWord = '',
   });
 
   @override
@@ -33,6 +35,7 @@ class InputText extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: TextFormField(
+        key: ValueKey(keyWord),
         initialValue: initialValue,
         decoration: InputDecoration(
           prefixIcon: Icon(

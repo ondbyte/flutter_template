@@ -9,6 +9,7 @@ Widget buildLogo(BuildContext context, double logoHeight) => Container(
           if (AppEnv.hasLogo)
             SvgPicture.asset(
               'assets/images/logo.svg',
+              key: const ValueKey("siteLogo"),
               fit: BoxFit.fill,
               height: logoHeight,
             ),
@@ -18,6 +19,7 @@ Widget buildLogo(BuildContext context, double logoHeight) => Container(
               children: [
                 SizedBox(height: 100.0),
                 RichText(
+                  key: const ValueKey("siteName"),
                   text: TextSpan(
                     text: AppEnv.app,
                     style: Theme.of(context).textTheme.caption.copyWith(
@@ -37,7 +39,10 @@ Widget buildLogo(BuildContext context, double logoHeight) => Container(
                 )
               ],
             ),
-          Text(AppEnv.description)
+          Text(
+            AppEnv.description,
+            key: const ValueKey("siteDescription"),
+          )
         ],
       ),
     );

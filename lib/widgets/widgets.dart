@@ -1,6 +1,7 @@
 export 'app_drawer/drawer.dart';
 export 'app_drawer/mobile/orientation_layout.dart';
 export 'app_drawer/tablet/orientation_layout.dart';
+export 'auth/auth_widget.dart';
 export 'drawer_option/mobile/orientation_layout.dart';
 export 'drawer_option/tablet/orientation_layout.dart';
 export 'app_drawer/side_drawer.dart';

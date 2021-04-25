@@ -4,7 +4,8 @@ import './../config/config.dart';
 class PageTitle extends StatelessWidget {
   final double height;
   final String title;
-  PageTitle({this.height, this.title});
+  final String keyWord;
+  PageTitle({this.height, this.title, this.keyWord});
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -14,6 +15,7 @@ class PageTitle extends StatelessWidget {
         children: <Widget>[
           Text(
             title,
+            key: ValueKey(keyWord),
             style: TextStyle(
               fontSize: 25.0,
               fontFamily: Font.primaryFont,

@@ -19,11 +19,11 @@ class LoginViewModel extends BaseViewModel {
     return response;
   }
 
-//  Future<Message> getForgottenPassword(String email) async {
-//    Message response = await userService.forgottenPassword(email);
-//
-//    notifyListeners();
-//
-//    return response;
-//  }
+ Future<Message> getForgottenPassword(String email) async {
+   Message response = await userService.forgottenPassword(email);
+
+   notifyListeners();
+
+   return response;
+ }
 }
