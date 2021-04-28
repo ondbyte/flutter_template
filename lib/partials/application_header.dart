@@ -51,7 +51,7 @@ class ApplicationHeader extends StatelessWidget {
         information != 'dashboard'
             ? IconButton(
                 onPressed: () => route == null
-                    ? Navigator.pushNamed(context, InitialScreenRoute, arguments: user)
+                    ? Navigator.pushNamed(context, ApplicationViewRoute, arguments: user)
                     : route == 'goback' ? Navigator.of(context).pop() : Navigator.of(context).pushNamedAndRemoveUntil(route, (Route<dynamic> route) => false),
                 icon: Icon(Icons.arrow_back),
               )

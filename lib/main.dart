@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
         primaryColor: Palette.primaryColour,
       ),
       onGenerateRoute: router.generateRoute,
-      initialRoute: IntroScreenRoute,
-      home: HomeView(),
+      initialRoute: IntroViewRoute,
+      home: IntroView(),
     );
   }
 }

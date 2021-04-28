@@ -1,4 +1,13 @@
 export 'home/view.dart';
+export 'home/mobile/orientation_layout.dart';
+export 'home/tablet/orientation_layout.dart';
+export 'intro/view.dart';
+export 'intro/mobile/orientation_layout.dart';
+export 'intro/tablet/orientation_layout.dart';
 export 'auth/login/view.dart';
+export 'auth/login/mobile/orientation_layout.dart';
+export 'auth/login/tablet/orientation_layout.dart';
 export 'auth/register/view.dart';
+export 'auth/register/mobile/orientation_layout.dart';
+export 'auth/register/tablet/orientation_layout.dart';
 export 'undefinded_screen.dart';

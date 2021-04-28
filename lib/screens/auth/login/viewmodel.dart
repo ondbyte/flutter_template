@@ -5,13 +5,13 @@ import '../../../services/services.dart';
 import '../../../viewmodels/base_viewmodel.dart';
 
 class LoginViewModel extends BaseViewModel {
-  UserApi userService = locator<UserApi>();
+  UserApi userApi = locator<UserApi>();
 
   Future logUserIn(User user) async {
     setState(ViewStateType.Processing);
     notifyListeners();
 
-    dynamic response = await userService.loginUser(user);
+    dynamic response = await userApi.loginUser(user);
 
     setState(ViewStateType.Completed);
     notifyListeners();
@@ -20,7 +20,7 @@ class LoginViewModel extends BaseViewModel {
   }
 
   Future<Message> getForgottenPassword(String email) async {
-    Message response = await userService.forgottenPassword(email);
+    Message response = await userApi.forgottenPassword(email);
 
     notifyListeners();
 

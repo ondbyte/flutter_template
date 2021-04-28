@@ -5,7 +5,7 @@ import '../../../services/services.dart';
 import '../../../viewmodels/base_viewmodel.dart';
 
 class RegisterViewModel extends BaseViewModel {
-  UserApi userService = locator<UserApi>();
+  UserApi userApi = locator<UserApi>();
   LegalApi legalService = locator<LegalApi>();
 
   String firstName;
@@ -72,8 +72,8 @@ class RegisterViewModel extends BaseViewModel {
 
     // String token = await _fcm.getToken();
 
-    // Message response = await userService.registerUser(user, profile,  token, email, app, text);
-    Message response = await userService.registerUser(user, profile);
+    // Message response = await userApi.registerUser(user, profile,  token, email, app, text);
+    Message response = await userApi.registerUser(user, profile);
 
     setState(ViewStateType.Completed);
     notifyListeners();

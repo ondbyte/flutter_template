@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import './../../../config/config.dart';
 import './../../../widgets/widgets.dart';
-import 'viewmodel.dart';
-import 'mobile/orientation_layout.dart';
+import './../../../viewmodels/viewmodels.dart';
+import './../../../screens/screens.dart';
 
 class LoginView extends StatelessWidget {
 

@@ -9,7 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  analyzer: ^1.5.0
+  glob: ^2.0.1
   cupertino_icons: ^1.0.2
   provider: ^5.0.0
   get_it: ^6.1.1
@@ -21,6 +22,7 @@ dependencies:
   another_flushbar: ^1.10.18
   flutter_svg: ^0.21.0+1
   url_launcher: ^6.0.3
+  splashscreen: ^1.3.5
 
 dev_dependencies:
   flutter_driver:
@@ -30,7 +32,7 @@ dev_dependencies:
     sdk: flutter
   faker: ^1.3.0
   mockito: ^5.0.4
-
+  bdd_widget_test: ^1.0.1
 
 # The following section is specific to Flutter.
 flutter:

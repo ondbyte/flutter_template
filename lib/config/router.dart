@@ -4,9 +4,9 @@ import './../screens/screens.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
-    // case IntroScreenRoute:
+    // case IntroViewRoute:
     //   return MaterialPageRoute(
-    //     builder: (context) => IntroScreen(),
+    //     builder: (context) => IntroView(),
     //   );
     case HomeViewRoute:
       return MaterialPageRoute(
@@ -20,7 +20,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => RegisterView(),
       );
-    // case InitialScreenRoute:
+    // case ApplicationViewRoute:
     //   var arguments = settings.arguments;
     //   return MaterialPageRoute(
     //     builder: (context) => InitialScreen(
