@@ -15,8 +15,8 @@ class UserQuery {
   // Get a single user from ID.
   String getUser() {
     return """
-      query user (\$id: ID!){
-        user (id: \$id) {
+      query me {
+        me {
           id
           name
           email

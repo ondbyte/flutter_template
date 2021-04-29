@@ -17,10 +17,10 @@ class IntroViewModel extends BaseViewModel {
 
   Future<void> _updateUserInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    int id = prefs.getInt('userId');
+    String token = prefs.getString('userToken');
 
-    if (id != null) {
-      user = await userService.getUser(id);
+    if (token != null && token != '') {
+      user = await userService.getUser(token);
     }
 
     setState(ViewStateType.Completed);

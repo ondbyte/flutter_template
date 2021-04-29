@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import './../../../config/config.dart';
 import './../../../enum/enum.dart';
-import '../viewmodel.dart';
+import './../../../viewmodels/viewmodels.dart';
 import './../../../widgets/widgets.dart';
 
 class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
@@ -17,8 +17,7 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
-            print("This is the floating action btn");
-//          data.updateTitle();
+            data.logUserOut();
             Navigator.pushNamed(context, LoginViewRoute);
           },
         ),
@@ -33,13 +32,12 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
                   size: 25.0,
                 ),
                 onPressed: () {
-                  print("Open the drawer.");
                   _scaffold.currentState.openDrawer();
                 },
               ),
             ),
             Expanded(
-              child: _appInfo(data),
+              child: appInfo(data),
             )
           ],
         ),
@@ -60,7 +58,7 @@ class HomeMobileLandscape extends BaseModelWidget<HomeViewModel> {
             Expanded(
               child: Center(
                 child: Center(
-                  child: _appInfo(data),
+                  child: appInfo(data),
                 ),
               ),
             )
@@ -71,21 +69,3 @@ class HomeMobileLandscape extends BaseModelWidget<HomeViewModel> {
   }
 }
 
-Widget _appInfo(data) {
-  return data.state == ViewStateType.Completed
-      ? Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                AppEnv.description,
-                style: TextStyle(
-                  fontSize: 15.0,
-                  fontFamily: Font.primaryFont,
-                ),
-              )
-            ],
-          ),
-        )
-      : Text("");
-}

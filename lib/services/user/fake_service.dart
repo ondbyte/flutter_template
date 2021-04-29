@@ -1,4 +1,5 @@
 import 'package:faker/faker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'api.dart';
 import '../../models/model.dart';
 import '../../config/config.dart';
@@ -14,15 +15,16 @@ class FakeUserServices implements UserApi {
         id: index + 1,
         name: faker.person.name(),
         email: faker.internet.email(),
-        avatar:
-            index % 2 == 0 ? "images/user/user.png" : "images/user/no-user.png",
+        avatar: index % 2 == 0 ? "images/user/user.png" : "images/user/no-user.png",
       ),
     );
   }
 
   @override
-  Future<User> getUser(int userId) async {
+  Future<User> getUser(String token) async {
     await Future.delayed(Duration(seconds: 1));
+
+    var userId = 1;
 
     if (userId % 2 == 0) {
       return User(
@@ -68,14 +70,25 @@ class FakeUserServices implements UserApi {
   }
 
   @override
+  Future<void> setUserToken(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("userToken", token);
+  }
+
+  @override
+  Future<void> logoutUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("userToken", "");
+  }
+
+  @override
   Future<Message> registerUser(User user, Profile profile) async {
     await Future.delayed(Duration(seconds: 1));
 
     return Message(
       status: 200,
       title: 'Success',
-      message:
-          'Test - You have been registered successfully. Please check your email.',
+      message: 'Test - You have been registered successfully. Please check your email.',
       colour: Palette.successColour,
     );
   }

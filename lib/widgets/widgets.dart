@@ -1,3 +1,4 @@
+export 'app/info.dart';
 export 'app_drawer/drawer.dart';
 export 'app_drawer/mobile/orientation_layout.dart';
 export 'app_drawer/tablet/orientation_layout.dart';

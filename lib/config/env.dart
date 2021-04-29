@@ -6,15 +6,15 @@ class AppEnv {
   static const description = 'The only place to resolve an argument!';
   static const version = '1.0.0';
 
-  static const bool fakeData = true;
+  static const bool fakeData = false;
 
   // Live site:
-  // static const String graphQLApi = "https://app.bonappetit.co.uk";
+  // static const String graphQLApi = "https://www.imarveldesign.co.uk/graphql";
 
-  // Test Site:
-  static const String ngrok = "d48137ce2ce8";
-
-  // Full link for API.
+  // // Test Site:
+  static const String ngrok = "cb54b55869f2";
+  //
+  // // Full link for API.
   static const String graphQLApi = 'https://$ngrok.ngrok.io/graphql';
 
   // API link with images.

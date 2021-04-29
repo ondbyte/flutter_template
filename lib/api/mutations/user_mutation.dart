@@ -5,6 +5,7 @@ class UserMutation {
     return """
       mutation login (\$input: LoginInput) {
         login (input: \$input) {
+          access_token
           user {
             id
             name

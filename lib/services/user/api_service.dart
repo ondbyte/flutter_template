@@ -1,4 +1,5 @@
 import 'package:graphql/client.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import './../../services/user/api.dart';
 import '../../models/model.dart';
@@ -46,19 +47,14 @@ class UserService implements UserApi {
 
   // Get a specific user from ID.
   @override
-  Future getUser(int id) async {
+  Future getUser(String token) async {
     try {
-      final String bearerToken = null;
-      final GraphQLClient _user = getGraphQLClient(bearerToken);
+      final GraphQLClient _user = getGraphQLClient(token);
 
       final QueryOptions options = QueryOptions(
-        document: gql(
-          userQuery.getUser(),
-        ),
-        variables: {
-          'id': id,
-        },
-      );
+          document: gql(
+        userQuery.getUser(),
+      ));
 
       final QueryResult response = await _user.query(options);
 
@@ -69,21 +65,15 @@ class UserService implements UserApi {
       final result = response.data;
 
       User user = User(
-        id: int.parse(result['user']['id']),
-        name: result['user']['name'],
-        avatar: result['user']['avatar'],
-        email: result['user']['email'],
+        id: int.parse(result['me']['id']),
+        name: result['me']['name'],
+        avatar: result['me']['avatar'],
+        email: result['me']['email'],
       );
 
       return user;
     } catch (e) {
-      return Message(
-        status: 401,
-        title: 'Error',
-        message: e.toString(),
-        colour: Palette.errorColour,
-        data: null,
-      );
+      throw Exception(e.toString());
     }
   }
 
@@ -133,6 +123,8 @@ class UserService implements UserApi {
         );
       }
 
+      this.setUserToken(response.data['login']['access_token']);
+
       return Message(
         status: 200,
         title: 'Success',
@@ -156,6 +148,20 @@ class UserService implements UserApi {
     } catch (e) {
       throw Exception(e.toString());
     }
+  }
+
+  // Set the user token in a shared preference variable.
+  @override
+  Future<void> setUserToken(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("userToken", token);
+  }
+
+  // Set the user token in a shared preference variable.
+  @override
+  Future<void> logoutUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("userToken", "");
   }
 
   // Register the user.
