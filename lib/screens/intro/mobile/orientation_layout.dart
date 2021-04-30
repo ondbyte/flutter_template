@@ -24,6 +24,7 @@ class IntroViewMobilePortrait extends BaseModelWidget<IntroViewModel> {
             navigateAfterSeconds: data.user != null && data.user.id > 0 ? HomeView() : LoginView(),
             title: Text(
               AppEnv.description,
+              key: const ValueKey("appDescription"),
               style: TextStyle(
                 fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.w900,
@@ -38,6 +39,7 @@ class IntroViewMobilePortrait extends BaseModelWidget<IntroViewModel> {
             loaderColor: Palette.primaryColour,
             loadingText: Text(
               'Loading app...',
+              key: const ValueKey("appLoading"),
               style: TextStyle(
                 fontFamily: Font.secondaryFont,
                 color: Palette.primaryColour,
